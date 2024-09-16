@@ -1,0 +1,58 @@
+.balance {
+    background-image: url('../Photo/Background.png'); /* Укажите путь к вашему изображению */
+    background-size: cover; /* Опция для растягивания изображения по всему экрану */
+    background-repeat: no-repeat; /* Запрещает повторение изображения */
+    background-position: center;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    bottom: 450px;
+    left: 50%; /* Центрируем элемент по горизонтали */
+    transform: translateX(-50%); /* Смещаем элемент на половину его ширины для точного центрирования */
+    max-width: 80vw; /* Задаем ширину, чтобы почти вся ширина экрана была занята */
+    width: 500px; /* Максимальная ширина для больших экранов */
+    padding: 10px 15px;
+    border-radius: 10px; /* Скругление углов */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+    text-align: left; /* Центрируем текст */
+    z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
+    height: 100px;
+  }
+  
+  .balance-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between; /* Располагаем текст слева и справа */
+    width: 100%;
+    margin-bottom: 10px; /* Отступ между текстом и кнопкой */
+  }
+  
+  .balance-text {
+    font-size: 1.5rem;
+    color: #ffffff96;
+    font-weight: normal; /* Обычный шрифт для текста */
+  }
+  
+  .balance-amount {
+    font-size: 2rem;
+    color: #ffffff;
+    font-weight: bold; /* Жирный шрифт для числа */
+  }
+  @media (min-width: 440px) {
+    .balance {
+        bottom: 500px;
+    }
+  }
+
+  .balance-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #90a5bc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  

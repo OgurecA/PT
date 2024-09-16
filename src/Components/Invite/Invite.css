@@ -1,0 +1,65 @@
+.invite {
+    background-image: url('../Photo/Background.png'); /* Укажите путь к вашему изображению */
+    background-size: cover; /* Опция для растягивания изображения по всему экрану */
+    background-repeat: no-repeat; /* Запрещает повторение изображения */
+    background-position: center;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    bottom: 400px;
+    left: 50%; /* Центрируем элемент по горизонтали */
+    transform: translateX(-50%); /* Смещаем элемент на половину его ширины для точного центрирования */
+    max-width: 80vw; /* Задаем ширину, чтобы почти вся ширина экрана была занята */
+    width: 500px; /* Максимальная ширина для больших экранов */
+    padding: 10px 15px;
+    border-radius: 10px; /* Скругление углов */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+    text-align: left; /* Центрируем текст */
+    z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
+    height: 150px;
+  }
+  
+  .invite-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between; /* Располагаем текст слева и справа */
+    width: 100%;
+    margin-bottom: 10px; /* Отступ между текстом и кнопкой */
+  }
+  
+  .invite-text {
+    font-size: 1.5rem;
+    color: #ffffff96;
+    font-weight: normal; /* Обычный шрифт для текста */
+  }
+  
+  .invite-amount {
+    font-size: 2rem;
+    color: #ffffff;
+    font-weight: bold; /* Жирный шрифт для числа */
+  }
+  @media (min-width: 440px) {
+    .invite {
+        bottom: 450px;
+    }
+  }
+  .invite-footer-text {
+    font-size: 0.85rem; /* Размер шрифта для маленького текста */
+    color: #777;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .invite-button {
+    padding: 20px 10px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #90a5bc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  

@@ -1,0 +1,63 @@
+.tasks-container {
+    position: fixed;
+    width: 500px; /* Ширина контейнера */
+    max-width: 80vw; /* Максимальная ширина контейнера */
+    height: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: auto;
+    border-radius: 10px; /* Скругленные углы для контейнера */
+    padding: 10px 15px; /* Внутренние отступы */
+    background-color: transparent; /* Цвет фона */
+    bottom: 50px;
+    scrollbar-width: none;
+  }
+  .tasks-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari и Edge */
+  }
+  
+  .tasks-list {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем отступы списка */
+    margin: 0; /* Убираем отступы списка */
+  }
+  
+  .tasks-item {
+    display: flex; /* Располагаем текстовые элементы в строку */
+    justify-content: space-between; /* Выравниваем текст по краям */
+    align-items: center; /* Центрируем элементы по вертикали */
+    padding: 10px; /* Отступы внутри элемента списка */
+    margin-bottom: 8px; /* Отступ между элементами */
+    border: 1px solid #ccc; /* Рамка для каждого элемента списка */
+    border-radius: 5px; /* Скругленные углы для каждого элемента списка */
+    background-color: #f9f9f9; /* Цвет фона каждого элемента списка */
+    transition: opacity 0.5s ease, background-color 0.3s ease;
+  }
+  .tasks-item.hidden {
+    pointer-events: none;
+    opacity: 0;
+  }
+  .tasks-item.filler {
+    opacity: 0; /* Скрываем элементы заполнителя */
+    pointer-events: none; /* Отключаем любые взаимодействия с элементами */
+  }
+  
+  .tasks-name {
+    font-weight: bold; /* Жирный шрифт для имени друга */
+    color: #333; /* Цвет текста для имени */
+  }
+  .tasks-collect-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  @media (min-width: 440px) {
+    .tasks-container {
+        height: 550px;
+    }
+  }

@@ -1,0 +1,48 @@
+* {
+  user-select: none; /* Отключает выделение для всех элементов */
+  -webkit-user-select: none; /* Для браузеров на базе WebKit */
+  -ms-user-select: none; /* Для Internet Explorer/Edge */
+  -moz-user-select: none; /* Для Firefox */
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+body {
+  background-image: url('./Components/Photo/Background.png'); /* Укажите путь к вашему изображению */
+  background-size: cover; /* Опция для растягивания изображения по всему экрану */
+  background-repeat: no-repeat; /* Запрещает повторение изображения */
+  background-position: center; /* Центрирует изображение */
+  height: 100vh;
+  margin: 0; /* Убирает внешние отступы для body */
+}
+@keyframes float {
+  0% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+  100% {
+      transform: translateY(-50px);
+      opacity: 0;
+  }
+}
+
+.float {
+  animation: float 1s ease-out forwards;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+}

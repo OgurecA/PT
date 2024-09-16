@@ -1,0 +1,71 @@
+/* Отключаем выделение текста, изображений и объектов на всей странице */
+* {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-tap-highlight-color: transparent; /* Убираем выделение на мобильных устройствах */
+    outline: none; /* Убираем обводку для всех элементов */
+  }
+  @font-face {
+    font-family: 'Ditty';
+    src: url('../Fonts/Ditty.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+  /* Стили для navbar */
+  .navbar {
+    background-image: url('../Photo/Background.png'); /* Укажите путь к вашему изображению */
+  background-size: cover; /* Опция для растягивания изображения по всему экрану */
+  background-repeat: no-repeat; /* Запрещает повторение изображения */
+  background-position: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 90vw;
+    width: 400px;
+    position: fixed;
+    bottom: 20px;
+    left: 50vw; /* Сдвигаем элемент влево на половину ширины экрана */
+    transform: translateX(-50%);
+    height: 50px;
+  }
+  
+  .navbutton {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 50px;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transform-origin: center left;
+    transition: width 0.2s ease-in;
+    color: inherit;
+    background-color: aqua;
+    margin: 5px;
+    cursor: pointer;
+    outline: none; /* Убираем обводку по умолчанию */
+  }
+  
+  /* Убираем обводку при фокусе */
+  .navbutton:focus {
+    outline: none; /* Убираем синий квадрат при фокусе */
+  }
+  
+  .navbutton.active {
+    display: flex;
+    width: 120px;
+    background-color: #f0f0f0;
+    border-radius: 25px;
+    outline: none;
+    justify-content: space-evenly;
+  }
+
