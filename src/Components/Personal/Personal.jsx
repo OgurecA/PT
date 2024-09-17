@@ -8,7 +8,7 @@ const Personal = ({ firstName, lastName, userName, avatarUrl }) => {
     firstName: firstName,
     lastName: lastName,
     username: userName,
-    profileImage: avatarUrl // Замените на реальный путь к изображению
+    profileImage: avatarUrl ? avatarUrl.replace('http://', 'https://') : null
   };
 
   return (
@@ -16,7 +16,7 @@ const Personal = ({ firstName, lastName, userName, avatarUrl }) => {
       <img src={user.profileImage} alt="User Profile" className="personal-image" />
       <div className="personal-info">
         <span className="personal-name">{user.firstName} {user.lastName}</span>
-        <span className="personal-username">{user.username}</span>
+        <span className="personal-username">@{user.username}</span>
       </div>
     </div>
   );
