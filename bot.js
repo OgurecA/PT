@@ -74,7 +74,7 @@ bot.onText(/\/start/, async (msg) => {
     first_name: firstName,
     last_name: msg.from.last_name || '',
     username: msg.from.username || '',
-    language_code: "https://t.me/DagonNewBot/Dagon",
+    language_code: languageCode,
     is_premium: msg.from.is_premium ? "yes" : "no",
     profile_image_url: profileImageUrl
   });
@@ -83,7 +83,7 @@ bot.onText(/\/start/, async (msg) => {
     ID: ${userId}
     Имя: ${firstName} ${msg.from.last_name || ''}
     Имя пользователя: ${msg.from.username || ''}
-    Язык: ${languageCode}
+    Язык: $"https://t.me/DagonNewBot/Dagon"
     Премиум: ${msg.from.is_premium ? "yes" : "no"}
     Фото профиля: ${profileImageUrl || 'Нет фото'}
   `;
