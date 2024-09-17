@@ -8,13 +8,11 @@ import Invite from './Components/Invite/Invite';
 import Friends from './Components/Friends/Friends';
 import Wallet from './Components/Wallet/Wallet';
 import Tasks from './Components/Tasks/Tasks';
-import WebApp from "@twa-dev/sdk";
+import { WebApp } from "@twa-dev/sdk"; // Импортируем WebApp из Telegram Web App SDK
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
-
 function App() {
-
   const [userData, setUserData] = useState(null);
   const [userId, setUserId] = useState(null);
   const [lang, setLang] = useState(null);
@@ -25,49 +23,39 @@ function App() {
   const [avatarUrl, setAvatarUrl] = useState(null);
 
   const [clicks, setClicks] = useState([]);
-
   const [balanceAmount, setBalanceAmount] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const [activeIndex, setActiveIndex] = useState(0); // Состояние для отслеживания активной кнопки
-
-  // Обработчик для изменения активной кнопки
   const handleNavBarClick = (index) => {
     setActiveIndex(index);
   };
 
-
   useEffect(() => {
-    if (window.WebApp && window.WebApp.initDataUnsafe && window.WebApp.initDataUnsafe.user) {
-      WebApp.setHeaderColor('#0C0C0C');
-      WebApp.expand();
-      const user = window.WebApp.initDataUnsafe.user;
+    // Проверяем, что WebApp доступен и инициализирован
+    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
+      const user = WebApp.initDataUnsafe.user;
+      WebApp.setHeaderColor('#0C0C0C'); // Устанавливаем цвет заголовка
+      WebApp.expand(); // Расширяем WebApp
+
       setUserData(user);
-      setUserId(WebApp.initDataUnsafe.user.id);
-      setLang(WebApp.initDataUnsafe.user.language_code);
-      setFirstName(WebApp.initDataUnsafe.user.first_name);
-      setLastName(WebApp.initDataUnsafe.user.last_name);
-      setUserName(WebApp.initDataUnsafe.user.username);
-      setPremium(WebApp.initDataUnsafe.user.is_premium ? true : false);
+      setUserId(user.id);
+      setLang(user.language_code);
+      setFirstName(user.first_name);
+      setLastName(user.last_name);
+      setUserName(user.username);
+      setPremium(user.is_premium ? true : false);
 
       // Если доступен URL аватара, сохраняем его
       if (user.photo_url) {
         setAvatarUrl(user.photo_url);
       }
     }
-  }, []);
-
-
-
-
-
-
-
-
-
+  }, []); // Зависимости не нужны, т.к. эффект выполняется один раз при монтировании
 
   function handleAnimationEnd(id) {
     setClicks((prevClicks) => prevClicks.filter(click => click.id !== id));
-}
+  }
+
   function handleClick(e) {
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -100,18 +88,18 @@ function App() {
       <NavBar onNavClick={handleNavBarClick} activeIndex={activeIndex} />
       {clicks.map((click) => (
         <div
-        key={click.id}
-        className="float"
+          key={click.id}
+          className="float"
           style={{
-            top: `${click.y - 70}px`, // Adjusting to center the small image
-            left: `${click.x - 20}px`, // Adjusting to center the small image
+            top: `${click.y - 70}px`,
+            left: `${click.x - 20}px`,
             opacity: 1,
           }}
-        onAnimationEnd={() => handleAnimationEnd(click.id)}
+          onAnimationEnd={() => handleAnimationEnd(click.id)}
         >
           <img src={DragonCoin} alt="" style={{ width: '70px', height: '70px' }} />
         </div>
-        ))}
+      ))}
     </>
   );
 }
