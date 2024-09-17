@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Personal.css'; // Импортируем CSS для стилизации
-import DragonCoin from '../Photo/DragonCoin.png'; 
+import DragonCoin from '../Photo/DragonCoin2.png'; 
 
 const Personal = ({ userId }) => {
   const [user, setUser] = useState({

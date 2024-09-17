@@ -1,5 +1,5 @@
 .wallet {
-    background-image: url('../Photo/Background.png'); /* Укажите путь к вашему изображению */
+  background-color: #0C0C0C;
     background-size: cover; /* Опция для растягивания изображения по всему экрану */
     background-repeat: no-repeat; /* Запрещает повторение изображения */
     background-position: center;
