@@ -13,7 +13,11 @@ const Personal = ({ firstName, lastName, userName, avatarUrl }) => {
 
   return (
     <div className="personal">
-      <img src={user.profileImage} alt="User Profile" className="personal-image" />
+      {user.profileImage ? (
+        <img src={user.profileImage} alt="User Profile" className="personal-image" />
+      ) : (
+        <img src={DragonCoin} alt="Default Profile" className="personal-image" />
+      )}
       <div className="personal-info">
         <span className="personal-name">{user.firstName} {user.lastName}</span>
         <span className="personal-username">@{user.username}</span>

@@ -45,6 +45,7 @@ function App() {
       setUserName(user.username);
       setPremium(user.is_premium ? true : false);
 
+      console.log('User photo URL:', user.photo_url);
       // Если доступен URL аватара, сохраняем его
       if (user.photo_url) {
         setAvatarUrl(user.photo_url);
