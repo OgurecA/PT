@@ -16,6 +16,8 @@ function App() {
 
   const [clicks, setClicks] = useState([]);
 
+   const [balanceAmount, setBalanceAmount] = useState(0);
+
   const [activeIndex, setActiveIndex] = useState(0); // Состояние для отслеживания активной кнопки
 
   // Обработчик для изменения активной кнопки
@@ -44,7 +46,11 @@ function App() {
     <>
       <Personal />
 
-      {activeIndex === 0 && <Balance />}
+      <Balance
+        isVisible={activeIndex === 0}
+        balanceAmount={balanceAmount}
+        setBalanceAmount={setBalanceAmount}
+      />
       {activeIndex === 0 && <Coin onClick={handleClick} />}
 
       {activeIndex === 1 && <Tasks />}
@@ -66,7 +72,7 @@ function App() {
           }}
         onAnimationEnd={() => handleAnimationEnd(click.id)}
         >
-          <img src={DragonCoin} alt="" style={{ width: '50px', height: '50px' }} />
+          <img src={DragonCoin} alt="" style={{ width: '70px', height: '70px' }} />
         </div>
         ))}
     </>

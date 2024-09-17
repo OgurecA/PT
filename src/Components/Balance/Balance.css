@@ -19,6 +19,15 @@
     z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
     height: 100px;
   }
+  .balance.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .balance.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
   
   .balance-header {
     display: flex;
@@ -54,5 +63,17 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  }
+  .balance-button.mining {
+    background-color: #28a745; /* Цвет кнопки, когда майнинг активен */
+    pointer-events: none;
+  }
+  
+  .balance-button.collect {
+    background-color: #ff0000; /* Красный цвет для кнопки Collect */
+  }
+  .balance-button:disabled {
+    cursor: initial;
+    opacity: 0.7;
   }
   
