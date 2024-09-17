@@ -1,8 +1,5 @@
 .balance {
-    background-image: url('../Photo/Background.png'); /* Укажите путь к вашему изображению */
-    background-size: cover; /* Опция для растягивания изображения по всему экрану */
-    background-repeat: no-repeat; /* Запрещает повторение изображения */
-    background-position: center;
+    background-color: black;
     position: fixed;
     display: flex;
     flex-direction: column;
