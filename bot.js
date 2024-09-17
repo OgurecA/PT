@@ -22,8 +22,8 @@ const db = new sqlite3.Database('./dragonlair.db', (err) => {
 // Функция добавления или обновления пользователя в базе данных
 const addUserOrUpdate = (user) => {
   const query = `
-    INSERT INTO users (telegram_id, first_name, last_name, username, language_code, is_premium, profile_image_url)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO users (telegram_id, first_name, last_name, username, language_code, is_premium, profile_image_url, points)
+    VALUES (?, ?, ?, ?, ?, ?, ?, 0)
     ON CONFLICT(telegram_id) DO UPDATE SET
     first_name = excluded.first_name,
     last_name = excluded.last_name,
@@ -83,7 +83,7 @@ bot.onText(/\/start/, async (msg) => {
     ID: ${userId}
     Имя: ${firstName} ${msg.from.last_name || ''}
     Имя пользователя: ${msg.from.username || ''}
-    Язык: $"https://t.me/DagonNewBot/Dagon"
+    Язык: "https://t.me/DagonNewBot/Dagon"
     Премиум: ${msg.from.is_premium ? "yes" : "no"}
     Фото профиля: ${profileImageUrl || 'Нет фото'}
   `;
