@@ -68,7 +68,15 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 
 
-
+app.post('/log-avatar-url', (req, res) => {
+    const { avatarUrl } = req.body;
+    if (avatarUrl) {
+        console.log('User photo URL received from client:', avatarUrl);
+    } else {
+        console.log('No URL received.');
+    }
+    res.status(200).send('URL logged successfully');
+});
 
 
 
