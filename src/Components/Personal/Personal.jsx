@@ -8,7 +8,7 @@ const Personal = ({ firstName, lastName, userName, avatarUrl }) => {
     firstName: firstName,
     lastName: lastName,
     username: userName,
-    profileImage: "blob:https://web.telegram.org/6f620462-d89a-437d-8c23-13a160073d15"
+    profileImage: "https://static.vecteezy.com/system/resources/thumbnails/025/181/412/small_2x/picture-a-captivating-scene-of-a-tranquil-lake-at-sunset-ai-generative-photo.jpg"
   };
 
   return (
