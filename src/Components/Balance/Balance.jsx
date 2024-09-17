@@ -21,7 +21,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount }) => {
       setTimer('06:00:00'); // Сбрасываем таймер до начального значения
       localStorage.removeItem('endTime'); // Удаляем конечное время из localStorage
     } else {
-      const countdownTime = 5 * 1000; // 6 часов в миллисекундах
+      const countdownTime = 10 * 1000; // 6 часов в миллисекундах
       const newEndTime = Date.now() + countdownTime; // Устанавливаем конечное время
       setEndTime(newEndTime);
       setIsMining(true); // Устанавливаем состояние майнинга в true

@@ -115,7 +115,44 @@ app.get('/get-user/:id', (req, res) => {
   });
   
 
+// Маршрут для получения points пользователя
+app.get('/get-user-points', (req, res) => {
+    const { userId } = req.query; // Получаем ID пользователя из запроса
+  
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is required' });
+    }
+  
+    const query = `SELECT points FROM users WHERE telegram_id = ?`;
+  
+    db.get(query, [userId], (err, row) => {
+      if (err) {
+        console.error('Ошибка при получении points пользователя из базы данных:', err.message);
+        return res.status(500).json({ error: 'Ошибка сервера' });
+      }
+  
+      if (row) {
+        res.json({ points: row.points });
+      } else {
+        res.status(404).json({ error: 'Пользователь не найден' });
+      }
+    });
+  });
 
+  
+  app.post('/update-user-points', (req, res) => {
+    const { userId, points } = req.body;
+    const query = `UPDATE users SET points = ? WHERE telegram_id = ?`;
+  
+    db.run(query, [points, userId], function (err) {
+      if (err) {
+        console.error('Ошибка при обновлении очков пользователя:', err.message);
+        res.status(500).json({ error: 'Ошибка сервера' });
+      } else {
+        res.json({ message: 'Очки пользователя обновлены успешно' });
+      }
+    });
+  });
 
 
 

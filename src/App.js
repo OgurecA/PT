@@ -46,6 +46,38 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (userId) {
+      fetch(`/get-user-points?userId=${userId}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.points !== undefined) {
+            setBalanceAmount(data.points);
+          } else {
+            console.error('Ошибка: Не удалось получить баланс пользователя');
+          }
+        })
+        .catch(error => console.error('Ошибка при получении баланса пользователя:', error));
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    if (userId) {
+      fetch('/update-user-points', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, points: balanceAmount }),
+      })
+      .then(response => response.json())
+      .then(data => console.log('Баланс пользователя обновлен:', data))
+      .catch(error => console.error('Ошибка при обновлении баланса пользователя:', error));
+    }
+  }, [balanceAmount]); // Следит за изменением balanceAmount
+
+
+
   function handleAnimationEnd(id) {
     setClicks((prevClicks) => prevClicks.filter(click => click.id !== id));
   }
