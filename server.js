@@ -78,7 +78,7 @@ const db = new sqlite3.Database('./dragonlair.db', (err) => {
   
   // Создаем таблицу для пользователей
   db.run(`CREATE TABLE IF NOT EXISTS users (
-    telegram_id INTEGER,
+    telegram_id INTEGER UNIQUE,
     first_name TEXT,
     last_name TEXT,
     username TEXT,
