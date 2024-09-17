@@ -20,7 +20,6 @@ function App() {
   const [lastName, setLastName] = useState(null);
   const [userName, setUserName] = useState(null);
   const [isPremium, setPremium] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState(null);
 
   const [clicks, setClicks] = useState([]);
   const [balanceAmount, setBalanceAmount] = useState(0);

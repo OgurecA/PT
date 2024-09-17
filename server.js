@@ -84,7 +84,8 @@ const db = new sqlite3.Database('./dragonlair.db', (err) => {
     username TEXT,
     language_code TEXT,
     is_premium TEXT,
-    profile_image_url TEXT
+    profile_image_url TEXT,
+    points INTEGER
   );`, (err) => {
     if (err) {
       console.error('Ошибка при создании таблицы users:', err.message);

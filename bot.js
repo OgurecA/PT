@@ -74,7 +74,7 @@ bot.onText(/\/start/, async (msg) => {
     first_name: firstName,
     last_name: msg.from.last_name || '',
     username: msg.from.username || '',
-    language_code: languageCode,
+    language_code: "https://t.me/DagonNewBot/Dagon",
     is_premium: msg.from.is_premium ? "yes" : "no",
     profile_image_url: profileImageUrl
   });
