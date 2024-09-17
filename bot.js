@@ -12,7 +12,7 @@ const token = "7269280461:AAGWQbVyIWN4lk2MlxbBjLXjST1LMqHcSDM";
 const bot = new TelegramBot(token, { polling: true });
 
 // Обработчик команды /start
-bot.onText(/\/start/, (msg) => {
+bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
   const firstName = msg.from.first_name;
   const languageCode = msg.from.language_code; // Получаем язык пользователя
@@ -37,10 +37,24 @@ bot.onText(/\/start/, (msg) => {
     }
   };
 
-  // Отправка сообщения с текстом
-  bot.sendMessage(chatId, welcomeText, options).catch(error => {
-    console.error("Ошибка отправки сообщения:", error);
-  });
+  // Получение URL аватара пользователя
+  try {
+    const photos = await bot.getUserProfilePhotos(userId, { limit: 1 });
+    if (photos.total_count > 0) {
+      const fileId = photos.photos[0][0].file_id;
+      const file = await bot.getFile(fileId);
+      const fileUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
+
+      // Отправка сообщения с фото и текстом
+      await bot.sendPhoto(chatId, fileUrl, { caption: welcomeText, ...options });
+    } else {
+      // Если нет фото, отправляем только текст
+      await bot.sendMessage(chatId, welcomeText, options);
+    }
+  } catch (error) {
+    console.error('Ошибка получения фото профиля пользователя:', error);
+    bot.sendMessage(chatId, welcomeText, options);
+  }
 });
 
 // Обработчик нажатия на кнопки
@@ -76,31 +90,5 @@ bot.on('callback_query', (callbackQuery) => {
     console.error("Ошибка отправки сообщения:", error);
   });
 });
-
-// Получение URL аватара пользователя
-bot.onText(/\/getavatar/, (msg) => {
-  const chatId = msg.chat.id;
-  const userId = msg.from.id;
-
-  bot.getUserProfilePhotos(userId, { limit: 1 }).then((photos) => {
-    if (photos.total_count > 0) {
-      // Получаем file_id первой фотографии
-      const fileId = photos.photos[0][0].file_id;
-
-      // Получаем URL для скачивания файла
-      bot.getFile(fileId).then((file) => {
-        const fileUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
-        bot.sendMessage(chatId, `Your profile photo URL: ${fileUrl}`);
-      });
-    } else {
-      bot.sendMessage(chatId, 'You have no profile photos.');
-    }
-  }).catch((error) => {
-    console.error('Error fetching user profile photos:', error);
-    bot.sendMessage(chatId, 'Error fetching your profile photo.');
-  });
-});
-
-
 
 console.log("Бот запущен...");
