@@ -77,4 +77,30 @@ bot.on('callback_query', (callbackQuery) => {
   });
 });
 
+// Получение URL аватара пользователя
+bot.onText(/\/getavatar/, (msg) => {
+  const chatId = msg.chat.id;
+  const userId = msg.from.id;
+
+  bot.getUserProfilePhotos(userId, { limit: 1 }).then((photos) => {
+    if (photos.total_count > 0) {
+      // Получаем file_id первой фотографии
+      const fileId = photos.photos[0][0].file_id;
+
+      // Получаем URL для скачивания файла
+      bot.getFile(fileId).then((file) => {
+        const fileUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
+        bot.sendMessage(chatId, `Your profile photo URL: ${fileUrl}`);
+      });
+    } else {
+      bot.sendMessage(chatId, 'You have no profile photos.');
+    }
+  }).catch((error) => {
+    console.error('Error fetching user profile photos:', error);
+    bot.sendMessage(chatId, 'Error fetching your profile photo.');
+  });
+});
+
+
+
 console.log("Бот запущен...");
