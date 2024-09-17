@@ -5,7 +5,6 @@ const TelegramBot = require('node-telegram-bot-api');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 const token = process.env.BOT_TOKEN || "7269280461:AAGWQbVyIWN4lk2MlxbBjLXjST1LMqHcSDM"; // Убедитесь, что ваш токен корректен
 
 // Создаем экземпляр бота
@@ -94,7 +93,3 @@ bot.onText(/\/start/, async (msg) => {
   });
 });
 
-// Запускаем сервер
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
