@@ -1,100 +1,100 @@
 const express = require('express');
+const sqlite3 = require('sqlite3').verbose();
+const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
-const fs = require('fs');
 require('dotenv').config();
 
 const app = express();
-
-// Ваш токен
-const token = "7269280461:AAGWQbVyIWN4lk2MlxbBjLXjST1LMqHcSDM";
+const PORT = process.env.PORT || 3000;
+const token = process.env.BOT_TOKEN || "7269280461:AAGWQbVyIWN4lk2MlxbBjLXjST1LMqHcSDM"; // Убедитесь, что ваш токен корректен
 
 // Создаем экземпляр бота
 const bot = new TelegramBot(token, { polling: true });
 
-// Обработчик команды /start
-bot.onText(/\/start/, async (msg) => {
-  const chatId = msg.chat.id;
-  const firstName = msg.from.first_name;
-  const languageCode = msg.from.language_code; // Получаем язык пользователя
-  const userId = msg.from.id;
-
-  // Определяем текст на основе языка пользователя
-  const welcomeText = languageCode === 'ru'
-    ? `${firstName}, отлично, ты тут! Я — Vince, и нам как раз нужна свежая кровь. Давай, погнали!`
-    : `Oi, ${firstName}, where you’ve been, mate? I’m Vince, and we could use some fresh blood around here! Let’s get moving!`;
-
-  const options = {
-    reply_markup: {
-      inline_keyboard: [
-        [{ text: languageCode === 'ru' ? "Играть" : "Play", url: 'https://t.me/DagonNewBot/Dagon' }],
-        [
-          { text: languageCode === 'ru' ? "Подписаться" : "Subscribe", url: 'https://t.me/direanimalsnews' },
-          { text: languageCode === 'ru' ? "Поделиться" : "Share", switch_inline_query: languageCode === 'ru' ? `\nЗаходи, введи мой код ${userId} и забери свою награду!` : `\nJoin, enter my code ${userId}, and claim your reward!` }
-        ],
-        [{ text: languageCode === 'ru' ? "Магазин" : "Market", url: 'https://t.me/DireAnimalsMarket_bot' }],
-        [{ text: languageCode === 'ru' ? "Академия" : "Academy", callback_data: 'button2' }]
-      ]
-    }
-  };
-
-  // Получение URL аватара пользователя
-  try {
-    const photos = await bot.getUserProfilePhotos(userId, { limit: 1 });
-    console.log('User photos:', photos); // Логируем информацию о фотографиях
-
-    if (photos.total_count > 0) {
-      const fileId = photos.photos[0][0].file_id;
-      console.log('Photo file ID:', fileId); // Логируем ID файла
-
-      const file = await bot.getFile(fileId);
-      const fileUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
-      console.log('Photo file URL:', fileUrl); // Логируем URL файла
-
-      // Отправка сообщения с фото и текстом
-      await bot.sendPhoto(chatId, fileUrl, { caption: welcomeText, ...options });
-    } else {
-      console.log('No profile photos found for user.'); // Логируем отсутствие фото
-      // Если нет фото, отправляем только текст
-      await bot.sendMessage(chatId, welcomeText, options);
-    }
-  } catch (error) {
-    console.error('Ошибка получения фото профиля пользователя:', error);
-    bot.sendMessage(chatId, welcomeText, options);
+// Подключаемся к существующей базе данных
+const db = new sqlite3.Database('./dragonlair.db', (err) => {
+  if (err) {
+    console.error('Ошибка при открытии базы данных:', err.message);
+  } else {
+    console.log('Подключение к базе данных установлено.');
   }
 });
 
-// Обработчик нажатия на кнопки
-bot.on('callback_query', (callbackQuery) => {
-  const msg = callbackQuery.message;
-  const data = callbackQuery.data;
-  const chatId = msg.chat.id;
-  const languageCode = callbackQuery.from.language_code;
-
-  let responseText;
-
-  if (data === 'button2') {
-    responseText = languageCode === 'ru' 
-      ? "Возникли проблемы?\n\nПопробуйте перезапустить приложение или очистить кэш браузера. Это часто решает многие технические трудности и помогает восстановить нормальную работу приложения.\n\nЕсли проблемы продолжаются, загляните в наш Telegram-канал для получения обновлений, поддержки и ответов на часто задаваемые вопросы.\nt.me/+ZMsO9uBIOZo5NWI0" 
-      : "Having issues?\n\nTry restarting the app or clearing your browser cache. This often resolves many technical difficulties and restores normal operation.\n\nIf the problems persist, check out our Telegram channel for updates, support, and answers to frequently asked questions.\nt.me/+ZMsO9uBIOZo5NWI0";
-  } 
+// Функция добавления или обновления пользователя в базе данных
+const addUserOrUpdate = (user) => {
+  const query = `
+    INSERT INTO users (telegram_id, first_name, last_name, username, language_code, is_premium, profile_image_url)
+    VALUES (?, ?, ?, ?, ?, ?)
+    ON CONFLICT(telegram_id) DO UPDATE SET
+    first_name = excluded.first_name,
+    last_name = excluded.last_name,
+    username = excluded.username,
+    language_code = excluded.language_code,
+    is_premium = excluded.is_premium,
+    profile_image_url = excluded.profile_image_url
+  `;
   
-  const options = {
-    reply_markup: {
-      inline_keyboard: [
-        [{ text: languageCode === 'ru' ? "Играть" : "Play", url: 'https://t.me/DireAnimals_bot/DireAnimals' }],
-        [
-          { text: languageCode === 'ru' ? "Подписаться" : "Subscribe", url: 'https://t.me/direanimalsnews' },
-          { text: languageCode === 'ru' ? "Поделиться" : "Share", switch_inline_query: '' }
-        ],
-        [{ text: languageCode === 'ru' ? "Магазин" : "Market", url: 'https://t.me/DireAnimalsMarket_bot' }]   
-      ]
+  db.run(query, [
+    user.id, user.first_name, user.last_name, user.username,
+    user.language_code, user.is_premium, user.profile_image_url
+  ], function (err) {
+    if (err) {
+      console.error('Ошибка при добавлении или обновлении пользователя в базе данных:', err.message);
+    } else {
+      console.log('Пользователь добавлен или обновлен в базе данных с ID:', this.lastID);
     }
-  };
+  });
+};
 
-  // Отправка сообщения с текстом и опциями
-  bot.sendMessage(chatId, responseText, options).catch(error => {
+// Middleware для обработки JSON-данных
+app.use(bodyParser.json());
+
+
+bot.onText(/\/start/, async (msg) => {
+  const chatId = msg.chat.id;
+  const firstName = msg.from.first_name;
+  const languageCode = msg.from.language_code;
+  const userId = msg.from.id;
+
+  let profileImageUrl = ''; // По умолчанию пустой URL
+
+  try {
+    const photos = await bot.getUserProfilePhotos(userId, { limit: 1 });
+    if (photos.total_count > 0) {
+      const fileId = photos.photos[0][0].file_id;
+      const file = await bot.getFile(fileId);
+      profileImageUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
+    }
+  } catch (error) {
+    console.error('Ошибка получения фото профиля пользователя:', error);
+  }
+
+  // Добавляем пользователя в базу данных
+  addUserOrUpdate({
+    id: userId,
+    first_name: firstName,
+    last_name: msg.from.last_name || '',
+    username: msg.from.username || '',
+    language_code: languageCode,
+    is_premium: msg.from.is_premium ? "yes" : "no",
+    profile_image_url: profileImageUrl
+  });
+
+  const userInfo = `
+    ID: ${userId}
+    Имя: ${firstName} ${msg.from.last_name || ''}
+    Имя пользователя: ${msg.from.username || ''}
+    Язык: ${languageCode}
+    Премиум: ${msg.from.is_premium ? "yes" : "no"}
+    Фото профиля: ${profileImageUrl || 'Нет фото'}
+  `;
+
+  bot.sendMessage(chatId, userInfo).catch(error => {
     console.error("Ошибка отправки сообщения:", error);
   });
 });
 
-console.log("Бот запущен...");
+// Запускаем сервер
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});

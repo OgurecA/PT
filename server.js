@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const xssFilters = require('xss-filters');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
-
+const bodyParser = require('body-parser');
 const app = express();
 app.set('trust proxy', 1);
 
@@ -50,6 +50,7 @@ app.use(helmet({
 }));
 
 // Парсинг JSON и URL-encoded данных
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -67,18 +68,30 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 
 
-
-app.post('/log-avatar-url', (req, res) => {
-    const { avatarUrl } = req.body;
-    if (avatarUrl) {
-        console.log('User photo URL received from client:', avatarUrl);
+const db = new sqlite3.Database('./dragonlair.db', (err) => {
+    if (err) {
+      console.error('Ошибка при открытии базы данных', err.message);
     } else {
-        console.log('No URL received.');
+      console.log('Подключение к базе данных установлено.');
     }
-    res.status(200).send('URL logged successfully');
-});
-
-
+  });
+  
+  // Создаем таблицу для пользователей
+  db.run(`CREATE TABLE IF NOT EXISTS users (
+    telegram_id INTEGER,
+    first_name TEXT,
+    last_name TEXT,
+    username TEXT,
+    language_code TEXT,
+    is_premium TEXT,
+    profile_image_url TEXT
+  );`, (err) => {
+    if (err) {
+      console.error('Ошибка при создании таблицы users:', err.message);
+    } else {
+      console.log('Таблица users создана или уже существует.');
+    }
+  });
 
 
 

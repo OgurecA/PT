@@ -43,25 +43,10 @@ function App() {
       setFirstName(user.first_name);
       setLastName(user.last_name);
       setUserName(user.username);
-      setPremium(user.is_premium ? true : false);
+      setPremium(user.is_premium ? "yes" : "no");
 
-      console.log('User photo URL:', user.photo_url);
-      // Если доступен URL аватара, сохраняем его
       
-      fetch('/log-avatar-url', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ avatarUrl: user.photo_url }),
-        })
-        .then(response => response.text())
-        .then(data => console.log('Server response:', data))
-        .catch(error => console.error('Error logging URL:', error));
-    
-      if (user.photo_url) {
-        setAvatarUrl(user.photo_url);
-      }
+      
     }
   }, []);
 
