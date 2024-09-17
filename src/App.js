@@ -8,7 +8,7 @@ import Invite from './Components/Invite/Invite';
 import Friends from './Components/Friends/Friends';
 import Wallet from './Components/Wallet/Wallet';
 import Tasks from './Components/Tasks/Tasks';
-import { WebApp } from "@twa-dev/sdk"; // Импортируем WebApp из Telegram Web App SDK
+import { telegramWebApp } from '@twa-dev/sdk'; // Импортируем Telegram Web App SDK
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
@@ -32,10 +32,10 @@ function App() {
 
   useEffect(() => {
     // Проверяем, что WebApp доступен и инициализирован
-    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
-      const user = WebApp.initDataUnsafe.user;
-      WebApp.setHeaderColor('#0C0C0C'); // Устанавливаем цвет заголовка
-      WebApp.expand(); // Расширяем WebApp
+    if (telegramWebApp.initDataUnsafe && telegramWebApp.initDataUnsafe.user) {
+      const user = telegramWebApp.initDataUnsafe.user;
+      telegramWebApp.setHeaderColor('#0C0C0C'); // Устанавливаем цвет заголовка
+      telegramWebApp.expand(); // Расширяем WebApp
 
       setUserData(user);
       setUserId(user.id);
@@ -50,7 +50,7 @@ function App() {
         setAvatarUrl(user.photo_url);
       }
     }
-  }, []); // Зависимости не нужны, т.к. эффект выполняется один раз при монтировании
+  }, []);
 
   function handleAnimationEnd(id) {
     setClicks((prevClicks) => prevClicks.filter(click => click.id !== id));
@@ -63,7 +63,7 @@ function App() {
     const imgRect = e.target.getBoundingClientRect();
     const imgX = imgRect.left;
     const imgY = imgRect.top;
-                
+
     setClicks([...clicks, { id: Date.now(), x: imgX + x, y: imgY + y }]);
   }
 
