@@ -8,7 +8,7 @@ const Personal = ({ firstName, lastName, userName, avatarUrl }) => {
     firstName: firstName,
     lastName: lastName,
     username: userName,
-    profileImage: avatarUrl ? avatarUrl.replace('http://', 'https://') : null
+    profileImage: "blob:https://web.telegram.org/6f620462-d89a-437d-8c23-13a160073d15"
   };
 
   return (
