@@ -12,22 +12,29 @@ const Personal = ({ userId }) => {
 
   // Получение данных пользователя из базы данных
   useEffect(() => {
-    fetch(`/get-user/${userId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data) {
-          setUser({
-            firstName: data.first_name,
-            lastName: data.last_name,
-            username: data.username,
-            profileImage: data.profile_image_url || ''
-          });
-        }
-      })
-      .catch((error) => {
-        console.error('Ошибка при получении данных пользователя:', error);
-      });
-  }, [userId]);
+    // Устанавливаем таймер на 5 секунд (5000 миллисекунд)
+    const timer = setTimeout(() => {
+      fetch(`/get-user/${userId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data) {
+            setUser({
+              firstName: data.first_name,
+              lastName: data.last_name,
+              username: data.username,
+              profileImage: data.profile_image_url || ''
+            });
+          }
+        })
+        .catch((error) => {
+          console.error('Ошибка при получении данных пользователя:', error);
+        });
+    }, 5000);
+  
+    // Очищаем таймер при размонтировании компонента или изменении userId
+    return () => clearTimeout(timer);
+  }, [userId]); // Перезапуск useEffect при изменении userId
+  
 
   return (
     <div className="personal">
