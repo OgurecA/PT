@@ -8,7 +8,7 @@ import Invite from './Components/Invite/Invite';
 import Friends from './Components/Friends/Friends';
 import Wallet from './Components/Wallet/Wallet';
 import Tasks from './Components/Tasks/Tasks';
-import { telegramWebApp } from '@twa-dev/sdk'; // Импортируем Telegram Web App SDK
+import WebApp from '@twa-dev/sdk';
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
@@ -32,10 +32,10 @@ function App() {
 
   useEffect(() => {
     // Проверяем, что WebApp доступен и инициализирован
-    if (telegramWebApp.initDataUnsafe && telegramWebApp.initDataUnsafe.user) {
-      const user = telegramWebApp.initDataUnsafe.user;
-      telegramWebApp.setHeaderColor('#0C0C0C'); // Устанавливаем цвет заголовка
-      telegramWebApp.expand(); // Расширяем WebApp
+    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
+      const user = WebApp.initDataUnsafe.user;
+      WebApp.setHeaderColor('#0C0C0C'); // Устанавливаем цвет заголовка
+      WebApp.expand(); // Расширяем WebApp
 
       setUserData(user);
       setUserId(user.id);
