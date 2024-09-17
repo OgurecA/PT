@@ -38,6 +38,8 @@ function App() {
 
   useEffect(() => {
     if (window.WebApp && window.WebApp.initDataUnsafe && window.WebApp.initDataUnsafe.user) {
+      WebApp.setHeaderColor('#0C0C0C');
+      WebApp.expand();
       const user = window.WebApp.initDataUnsafe.user;
       setUserData(user);
       setUserId(WebApp.initDataUnsafe.user.id);
