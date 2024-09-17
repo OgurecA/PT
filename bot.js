@@ -40,14 +40,20 @@ bot.onText(/\/start/, async (msg) => {
   // Получение URL аватара пользователя
   try {
     const photos = await bot.getUserProfilePhotos(userId, { limit: 1 });
+    console.log('User photos:', photos); // Логируем информацию о фотографиях
+
     if (photos.total_count > 0) {
       const fileId = photos.photos[0][0].file_id;
+      console.log('Photo file ID:', fileId); // Логируем ID файла
+
       const file = await bot.getFile(fileId);
       const fileUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
+      console.log('Photo file URL:', fileUrl); // Логируем URL файла
 
       // Отправка сообщения с фото и текстом
       await bot.sendPhoto(chatId, fileUrl, { caption: welcomeText, ...options });
     } else {
+      console.log('No profile photos found for user.'); // Логируем отсутствие фото
       // Если нет фото, отправляем только текст
       await bot.sendMessage(chatId, welcomeText, options);
     }
