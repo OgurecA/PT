@@ -8,6 +8,7 @@ import Invite from './Components/Invite/Invite';
 import Friends from './Components/Friends/Friends';
 import Wallet from './Components/Wallet/Wallet';
 import Tasks from './Components/Tasks/Tasks';
+import WebApp from "@twa-dev/sdk";
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
