@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import Coin from './Components/Coin/Coin';
@@ -14,9 +14,18 @@ import DragonCoin from './Components/Photo/DragonCoin2.png';
 
 function App() {
 
+  const [userData, setUserData] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [lang, setLang] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [userName, setUserName] = useState(null);
+  const [isPremium, setPremium] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState(null);
+
   const [clicks, setClicks] = useState([]);
 
-   const [balanceAmount, setBalanceAmount] = useState(0);
+  const [balanceAmount, setBalanceAmount] = useState(0);
 
   const [activeIndex, setActiveIndex] = useState(0); // Состояние для отслеживания активной кнопки
 
@@ -26,10 +35,36 @@ function App() {
   };
 
 
+  useEffect(() => {
+    if (window.WebApp && window.WebApp.initDataUnsafe && window.WebApp.initDataUnsafe.user) {
+      const user = window.WebApp.initDataUnsafe.user;
+      setUserData(user);
+      setUserId(WebApp.initDataUnsafe.user.id);
+      setLang(WebApp.initDataUnsafe.user.language_code);
+      setFirstName(WebApp.initDataUnsafe.user.first_name);
+      setLastName(WebApp.initDataUnsafe.user.last_name);
+      setUserName(WebApp.initDataUnsafe.user.username);
+      setPremium(WebApp.initDataUnsafe.user.is_premium ? true : false);
+
+      // Если доступен URL аватара, сохраняем его
+      if (user.photo_url) {
+        setAvatarUrl(user.photo_url);
+      }
+    }
+  }, []);
+
+
+
+
+
+
+
+
+
+
   function handleAnimationEnd(id) {
     setClicks((prevClicks) => prevClicks.filter(click => click.id !== id));
 }
-
   function handleClick(e) {
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -38,13 +73,12 @@ function App() {
     const imgX = imgRect.left;
     const imgY = imgRect.top;
                 
-
     setClicks([...clicks, { id: Date.now(), x: imgX + x, y: imgY + y }]);
   }
 
   return (
     <>
-      <Personal />
+      <Personal firstName={firstName} lastName={lastName} userName={userName} avatarUrl={avatarUrl} />
 
       <Balance
         isVisible={activeIndex === 0}

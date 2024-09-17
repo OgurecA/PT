@@ -65,6 +65,59 @@ app.use(cors(corsOptions));
 // Подключение статических файлов
 app.use(express.static(path.join(__dirname, 'build')));
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Обработка любых маршрутов
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
