@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Personal.css'; // Импортируем CSS для стилизации
 import DragonCoin from '../Photo/DragonCoin.png'; 
 
-const Personal = ({ firstName, lastName, userName, avatarUrl }) => {
-  // Пример данных пользователя
-  const user = {
-    firstName: firstName,
-    lastName: lastName,
-    username: userName,
-    profileImage: "https://static.vecteezy.com/system/resources/thumbnails/025/181/412/small_2x/picture-a-captivating-scene-of-a-tranquil-lake-at-sunset-ai-generative-photo.jpg"
-  };
+const Personal = ({ userId }) => {
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    username: '',
+    profileImage: ''
+  });
+
+  // Получение данных пользователя из базы данных
+  useEffect(() => {
+    fetch(`/get-user/${userId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          setUser({
+            firstName: data.first_name,
+            lastName: data.last_name,
+            username: data.username,
+            profileImage: data.profile_image_url || ''
+          });
+        }
+      })
+      .catch((error) => {
+        console.error('Ошибка при получении данных пользователя:', error);
+      });
+  }, [userId]);
 
   return (
     <div className="personal">

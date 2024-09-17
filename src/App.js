@@ -43,10 +43,7 @@ function App() {
       setFirstName(user.first_name);
       setLastName(user.last_name);
       setUserName(user.username);
-      setPremium(user.is_premium ? "yes" : "no");
-
-      
-      
+      setPremium(user.is_premium ? "yes" : "no");  
     }
   }, []);
 
@@ -67,7 +64,7 @@ function App() {
 
   return (
     <>
-      <Personal firstName={firstName} lastName={lastName} userName={userName} avatarUrl={avatarUrl} />
+      <Personal userId={userId} />
 
       <Balance
         isVisible={activeIndex === 0}

@@ -96,7 +96,23 @@ const db = new sqlite3.Database('./dragonlair.db', (err) => {
 
 
 
-
+// Endpoint для получения информации о пользователе по ID
+app.get('/get-user/:id', (req, res) => {
+    const userId = req.params.id;
+    const query = `SELECT first_name, last_name, username, profile_image_url FROM users WHERE telegram_id = ?`;
+  
+    db.get(query, [userId], (err, row) => {
+      if (err) {
+        console.error('Ошибка при получении информации о пользователе:', err.message);
+        res.status(500).json({ error: 'Ошибка сервера' });
+      } else if (row) {
+        res.status(200).json(row);
+      } else {
+        res.status(404).json({ error: 'Пользователь не найден' });
+      }
+    });
+  });
+  
 
 
 
