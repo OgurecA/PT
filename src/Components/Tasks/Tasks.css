@@ -1,15 +1,15 @@
 .tasks-container {
-    position: fixed;
-    width: 500px; /* Ширина контейнера */
-    max-width: 80vw; /* Максимальная ширина контейнера */
-    height: 500px;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow-y: auto;
-    background-color: transparent; /* Цвет фона */
-    bottom: 50px;
-    scrollbar-width: none;
-  }
+  position: fixed;
+  width: 500px; /* Ширина контейнера */
+  max-width: 80vw; /* Максимальная ширина контейнера */
+  height: 490px;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-y: auto;
+  background-color: transparent; /* Цвет фона */
+  bottom: 60px;
+  scrollbar-width: none;
+}
   .tasks-container::-webkit-scrollbar {
     display: none; /* Chrome, Safari и Edge */
   }
@@ -84,6 +84,6 @@
   
   @media (min-width: 440px) {
     .tasks-container {
-        height: 550px;
+        height: 540px;
     }
   }
