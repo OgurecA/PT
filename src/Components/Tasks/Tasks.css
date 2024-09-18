@@ -23,40 +23,69 @@
   }
   
   .tasks-item {
-    display: flex; /* Располагаем текстовые элементы в строку */
-    justify-content: space-between; /* Выравниваем текст по краям */
-    align-items: center; /* Центрируем элементы по вертикали */
-    padding: 10px; /* Отступы внутри элемента списка */
-    margin-bottom: 8px; /* Отступ между элементами */
-    border: 1px solid #ccc; /* Рамка для каждого элемента списка */
-    border-radius: 5px; /* Скругленные углы для каждого элемента списка */
-    background-color: #f9f9f9; /* Цвет фона каждого элемента списка */
-    transition: opacity 0.5s ease, background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd; /* Светлая рамка */
+    border-radius: 8px;
+    background-color: #fff; /* Белый фон */
+    transition: opacity 0.5s ease, background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Легкая тень для каждого элемента */
   }
+  
+  /* Скрытые элементы */
   .tasks-item.hidden {
     pointer-events: none;
     opacity: 0;
-  }
-  .tasks-item.filler {
-    opacity: 0; /* Скрываем элементы заполнителя */
-    pointer-events: none; /* Отключаем любые взаимодействия с элементами */
+    transform: translateY(10px); /* Сдвиг при скрытии */
   }
   
+  /* Стиль для заполнителя */
+  .tasks-item.filler {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Стиль для названия задачи */
   .tasks-name {
-    font-weight: bold; /* Жирный шрифт для имени друга */
-    color: #333; /* Цвет текста для имени */
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    margin-right: 20px;
   }
+  
+  /* Стиль для награды */
   .tasks-reward {
-    text-align: right;
+    font-size: 14px;
+    color: #888; /* Серый цвет для награды */
+    margin-right: 10px;
   }
+  
+  /* Стиль кнопки */
   .tasks-collect-button {
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 8px 16px;
+    background-color: #28a745; /* Зеленый цвет кнопки */
     color: white;
+    font-size: 14px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Эффекты при наведении */
+  .tasks-collect-button:hover {
+    background-color: #218838; /* Темнее при наведении */
+    transform: translateY(-2px); /* Небольшой подъем при наведении */
+  }
+  
+  /* Эффект нажатия */
+  .tasks-collect-button:active {
+    background-color: #1e7e34;
+    transform: translateY(1px); /* Небольшой сдвиг вниз при нажатии */
   }
   
   @media (min-width: 440px) {
