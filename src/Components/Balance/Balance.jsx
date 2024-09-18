@@ -5,6 +5,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
   // Состояние для отслеживания таймера и видимости кнопки
   const [timer, setTimer] = useState('06:00:00'); // Инициализируем таймер на 6 часов
   const [isMining, setIsMining] = useState(false); // Состояние для отслеживания, идет ли майнинг
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isCollected, setIsCollected] = useState(() => {
     // Восстанавливаем состояние "Collect" из localStorage
     const savedIsCollected = localStorage.getItem('isCollected');
@@ -71,6 +72,15 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
     }
   }, [endTime]);
 
+  useEffect(() => {
+    // Делаем кнопку неактивной на 2.5 секунды
+    const disableButtonTimeout = setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 2500);
+
+    return () => clearTimeout(disableButtonTimeout); // Очищаем таймер при размонтировании
+  }, []);
+
   return (
     <div className={`balance ${isVisible ? 'visible' : 'hidden'}`}>
       <div className="balance-header">
@@ -84,6 +94,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
       <button
         className={`balance-button ${isMining ? 'mining' : isCollected ? 'collect' : ''}`} // Добавляем класс в зависимости от состояния
         onClick={handleButtonClick}
+        disabled={isButtonDisabled}
       >
         {isCollected ? 'Collect' : isMining ? timer : 'Start mining'}
       </button>
