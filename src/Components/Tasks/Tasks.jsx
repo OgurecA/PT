@@ -16,7 +16,8 @@ const Tasks = () => {
     { id: 10, name: 'Share on Social Media', reward: '+30', link: 'https://example.com/share' },
   ];
 
-  const [loadingTasks, setLoadingTasks] = useState([]);
+  const [loadingTasks, setLoadingTasks] = useState([]);  // Задачи, которые находятся в процессе загрузки
+  const [completedTasks, setCompletedTasks] = useState([]); // Задачи, которые завершены
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -47,9 +48,10 @@ const Tasks = () => {
   const handleTaskClick = (taskId) => {
     setLoadingTasks((prev) => [...prev, taskId]); // Добавляем задачу в массив загрузки
 
-    // Убираем задачу из массива загрузки через 5 секунд
+    // Убираем задачу из массива загрузки через 5 секунд и добавляем в завершенные
     setTimeout(() => {
       setLoadingTasks((prev) => prev.filter((id) => id !== taskId));
+      setCompletedTasks((prev) => [...prev, taskId]); // Добавляем в завершенные задачи
     }, 5000);
   };
 
@@ -62,11 +64,16 @@ const Tasks = () => {
             <span className="tasks-reward">{task.reward}</span>
             <a href={task.link} target="_blank" rel="noopener noreferrer">
               <button
-                className={`tasks-collect-button ${loadingTasks.includes(task.id) ? 'loading' : ''}`}
+                className={`tasks-collect-button ${
+                  loadingTasks.includes(task.id) ? 'loading' :
+                  completedTasks.includes(task.id) ? 'completed' : ''
+                }`}
                 onClick={() => handleTaskClick(task.id)}
               >
                 {loadingTasks.includes(task.id) ? (
                   <div className="spinner"></div> // Если идет загрузка, показываем спиннер
+                ) : completedTasks.includes(task.id) ? (
+                  'Collect' // Если задача завершена, показываем "Collect"
                 ) : (
                   'Earn' // Иначе показываем текст "Earn"
                 )}
