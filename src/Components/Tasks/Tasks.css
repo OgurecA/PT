@@ -107,13 +107,6 @@
     }
   }
   
-
-  
-  /* Эффект нажатия */
-  .tasks-collect-button:active {
-    background-color: #1e7e34;
-    transform: translateY(1px); /* Небольшой сдвиг вниз при нажатии */
-  }
   
   @media (min-width: 440px) {
     .tasks-container {

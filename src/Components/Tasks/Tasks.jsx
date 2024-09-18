@@ -13,7 +13,11 @@ const Tasks = () => {
 
   const [loadingTasks, setLoadingTasks] = useState([]);  // Задачи, которые находятся в процессе загрузки
   const [collectTasks, setCollectTasks] = useState([]); // Задачи, которые можно собрать
-  const [collectedTasks, setCollectedTasks] = useState([]); // Задачи, которые уже собраны
+  const [collectedTasks, setCollectedTasks] = useState(() => {
+    // Инициализируем из localStorage или пустого массива
+    const savedTasks = localStorage.getItem('collectedTasks');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
 
   const containerRef = useRef(null);
 
@@ -42,6 +46,11 @@ const Tasks = () => {
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Сохраняем завершенные задачи в localStorage при их обновлении
+  useEffect(() => {
+    localStorage.setItem('collectedTasks', JSON.stringify(collectedTasks));
+  }, [collectedTasks]);
+
   const handleTaskClick = (taskId, link) => {
     if (collectedTasks.includes(taskId)) return; // Если уже собрано, ничего не делаем
 
@@ -61,7 +70,7 @@ const Tasks = () => {
 
   const handleCollectClick = (taskId) => {
     setCollectTasks((prev) => prev.filter((id) => id !== taskId)); // Убираем задачу из collect
-    setCollectedTasks((prev) => [...prev, taskId]); // Задача собрана
+    setCollectedTasks((prev) => [...prev, taskId]); // Задача собрана и сохраняется в collected
   };
 
   return (
