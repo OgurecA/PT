@@ -1,95 +1,83 @@
 .tasks-container {
-    position: fixed;
-    width: 500px; /* Ширина контейнера */
-    max-width: 80vw; /* Максимальная ширина контейнера */
-    height: 500px;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow-y: auto;
-    border-radius: 10px; /* Скругленные углы для контейнера */
-    padding: 10px 15px; /* Внутренние отступы */
-    background-color: transparent; /* Цвет фона */
-    bottom: 50px;
-    scrollbar-width: none;
+  overflow-y: auto;
+  max-height: 100%;
+  padding: 15px;
+  background-color: #f4f4f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Элементы списка задач */
+.tasks-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: opacity 0.5s ease, background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Скрытые элементы */
+.tasks-item.hidden {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Стиль для заполнителя */
+.tasks-item.filler {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Стиль для названия задачи */
+.tasks-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  margin-right: 20px;
+  flex-grow: 1; /* Заставляем название задачи занимать всю доступную ширину */
+}
+
+/* Стиль для награды */
+.tasks-reward {
+  font-size: 14px;
+  color: #888;
+  margin-right: 5px; /* Добавляем отступ справа в 5px */
+}
+
+/* Стиль кнопки */
+.tasks-collect-button {
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Эффекты при наведении */
+.tasks-collect-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* Эффект нажатия */
+.tasks-collect-button:active {
+  background-color: #1e7e34;
+  transform: translateY(1px);
+}
+
+/* Адаптация для больших экранов */
+@media (min-width: 440px) {
+  .tasks-container {
+    height: 550px;
   }
-  .tasks-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari и Edge */
-  }
-  
-  .tasks-list {
-    list-style-type: none; /* Убираем маркеры списка */
-    padding: 0; /* Убираем отступы списка */
-    margin: 0; /* Убираем отступы списка */
-  }
-  
-  .tasks-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 15px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd; /* Светлая рамка */
-    border-radius: 8px;
-    background-color: #fff; /* Белый фон */
-    transition: opacity 0.5s ease, background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Легкая тень для каждого элемента */
-  }
-  
-  /* Скрытые элементы */
-  .tasks-item.hidden {
-    pointer-events: none;
-    opacity: 0;
-    transform: translateY(10px); /* Сдвиг при скрытии */
-  }
-  
-  /* Стиль для заполнителя */
-  .tasks-item.filler {
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  /* Стиль для названия задачи */
-  .tasks-name {
-    font-weight: 600;
-    font-size: 16px;
-    color: #333;
-    margin-right: 20px;
-  }
-  
-  /* Стиль для награды */
-  .tasks-reward {
-    font-size: 14px;
-    color: #888; /* Серый цвет для награды */
-    margin-right: 10px;
-  }
-  
-  /* Стиль кнопки */
-  .tasks-collect-button {
-    padding: 8px 16px;
-    background-color: #28a745; /* Зеленый цвет кнопки */
-    color: white;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Эффекты при наведении */
-  .tasks-collect-button:hover {
-    background-color: #218838; /* Темнее при наведении */
-    transform: translateY(-2px); /* Небольшой подъем при наведении */
-  }
-  
-  /* Эффект нажатия */
-  .tasks-collect-button:active {
-    background-color: #1e7e34;
-    transform: translateY(1px); /* Небольшой сдвиг вниз при нажатии */
-  }
-  
-  @media (min-width: 440px) {
-    .tasks-container {
-        height: 550px;
-    }
-  }
+}

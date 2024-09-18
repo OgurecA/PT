@@ -9,6 +9,11 @@ const Tasks = () => {
     { id: 3, name: 'Watch an Ad', reward: '+20', link: 'https://example.com/ad' },
     { id: 4, name: 'Reach Level 10', reward: '+200', link: 'https://example.com/levelup' },
     { id: 5, name: 'Share on Social Media', reward: '+30', link: 'https://example.com/share' },
+    { id: 6, name: 'Complete Daily Challenge', reward: '+100', link: 'https://example.com/challenge' },
+    { id: 7, name: 'Invite a Friend', reward: '+50', link: 'https://example.com/invite' },
+    { id: 8, name: 'Watch an Ad', reward: '+20', link: 'https://example.com/ad' },
+    { id: 9, name: 'Reach Level 10', reward: '+200', link: 'https://example.com/levelup' },
+    { id: 10, name: 'Share on Social Media', reward: '+30', link: 'https://example.com/share' },
   ];
 
   const containerRef = useRef(null);
