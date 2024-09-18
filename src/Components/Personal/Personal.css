@@ -42,3 +42,41 @@
     color: #777;
   }
   
+
+
+  .personal .skeleton-image {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    animation: skeleton-loading 1.5s infinite linear;
+  }
+  
+  .personal .skeleton-text {
+    height: 20px;
+    background-color: #ccc;
+    margin-bottom: 10px;
+    animation: skeleton-loading 1.5s infinite linear;
+  }
+  
+  .skeleton-name {
+    width: 60%;
+  }
+  
+  .skeleton-username {
+    width: 40%;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-color: #ccc;
+    }
+    50% {
+      background-color: #e0e0e0;
+    }
+    100% {
+      background-color: #ccc;
+    }
+  }
+  

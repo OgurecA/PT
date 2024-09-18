@@ -47,6 +47,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
     if (userId) {
       fetch(`/get-user-points?userId=${userId}`)
         .then(response => response.json())
@@ -59,7 +60,10 @@ function App() {
         })
         .catch(error => console.error('Ошибка при получении баланса пользователя:', error));
     }
+  }, 1000);
   
+  // Очищаем таймер при размонтировании компонента или изменении userId
+  return () => clearTimeout(timer);
   }, [userId]);
 
   useEffect(() => {
