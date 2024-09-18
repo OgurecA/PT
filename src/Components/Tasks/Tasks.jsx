@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Tasks.css'; // Импортируем CSS для стилизации
 
-const Tasks = () => {
+const Tasks = ({ balanceAmount, setBalanceAmount }) => {
   // Задачи: название, вознаграждение и ссылка
   const tasksList = [
     { id: 1, name: 'Complete Daily Challenge', reward: '+100', link: 'https://example.com/challenge' },
@@ -79,7 +79,7 @@ const Tasks = () => {
         {tasksList.map((task) => (
           <li key={task.id} className="tasks-item">
             <span className="tasks-name">{task.name}</span>
-            <span className="tasks-reward">{task.reward}</span>
+            <span className="tasks-reward">+{task.reward}</span>
             <button
               className={`tasks-collect-button ${
                 loadingTasks.includes(task.id) ? 'loading' :
@@ -87,7 +87,7 @@ const Tasks = () => {
                 collectedTasks.includes(task.id) ? 'collected' : ''
               }`}
               onClick={() => collectTasks.includes(task.id) 
-                ? handleCollectClick(task.id) 
+                ? handleCollectClick(task.id, task.reward) // Добавляем награду при нажатии на Collect
                 : handleTaskClick(task.id, task.link)}
               disabled={collectedTasks.includes(task.id)} // Отключаем кнопку, если задача собрана
             >

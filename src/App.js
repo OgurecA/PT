@@ -113,7 +113,7 @@ function App() {
       />
       {activeIndex === 0 && <Coin onClick={handleClick} />}
 
-      {activeIndex === 1 && <Tasks />}
+      {activeIndex === 1 && <Tasks balanceAmount={balanceAmount} setBalanceAmount={setBalanceAmount} />}
 
       {activeIndex === 2 && <Invite />}
       {activeIndex === 2 && <Friends />}
