@@ -64,7 +64,6 @@ const Tasks = () => {
               <button
                 className={`tasks-collect-button ${loadingTasks.includes(task.id) ? 'loading' : ''}`}
                 onClick={() => handleTaskClick(task.id)}
-                disabled={loadingTasks.includes(task.id)} // Отключаем кнопку, если она в состоянии загрузки
               >
                 {loadingTasks.includes(task.id) ? (
                   <div className="spinner"></div> // Если идет загрузка, показываем спиннер
