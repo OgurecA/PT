@@ -51,7 +51,6 @@ const Personal = ({ userId }) => {
       
       <div className="personal-info">
         {loading ? (
-          // Полоски загрузки для имени и имени пользователя
           <>
             <div className="skeleton-text skeleton-name" />
             <div className="skeleton-text skeleton-username" />
