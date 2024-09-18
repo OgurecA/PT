@@ -60,7 +60,7 @@ function App() {
         })
         .catch(error => console.error('Ошибка при получении баланса пользователя:', error));
     }
-  }, 5000);
+  }, 1000);
   
   // Очищаем таймер при размонтировании компонента или изменении userId
   return () => clearTimeout(timer);
