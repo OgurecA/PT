@@ -31,7 +31,7 @@ const Personal = ({ userId }) => {
           console.error('Ошибка при получении данных пользователя:', error);
           setLoading(false); // Отключаем состояние загрузки даже в случае ошибки
         });
-    }, 1000);
+    }, 3000);
   
     // Очищаем таймер при размонтировании компонента или изменении userId
     return () => clearTimeout(timer);
@@ -51,7 +51,7 @@ const Personal = ({ userId }) => {
       <div className="personal-info">
         {loading ? (
           // Пока данные загружаются, показываем только spinner
-          <div className="loading-text">Загрузка...</div>
+          <div className="loading-text"></div>
         ) : (
           <>
             <span className="personal-name">{user.firstName} {user.lastName}</span>
