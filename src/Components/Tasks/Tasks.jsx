@@ -2,23 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import './Tasks.css'; // Импортируем CSS для стилизации
 
 const Tasks = () => {
+  // Задачи: название, вознаграждение и ссылка
   const tasksList = [
-    { id: 1, name: 'Bob Johnson', username: '@bobjohnson' },
-    { id: 2, name: 'Charlie Brown', username: '@charliebrown' },
-    { id: 3, name: 'David Wilson', username: '@davidwilson' },
-    { id: 4, name: 'Eve Davis', username: '@evedavis' },
-    { id: 5, name: 'Bob Johnson', username: '@bobjohnson' },
-    { id: 6, name: 'Charlie Brown', username: '@charliebrown' },
-    { id: 7, name: 'David Wilson', username: '@davidwilson' },
-    { id: 8, name: 'Eve Davis', username: '@evedavis' },
-    { id: 1, name: 'Bob Johnson', username: '@bobjohnson' },
-    { id: 2, name: 'Charlie Brown', username: '@charliebrown' },
-    { id: 3, name: 'David Wilson', username: '@davidwilson' },
-    { id: 4, name: 'Eve Davis', username: '@evedavis' },
-    { id: 5, name: 'Bob Johnson', username: '@bobjohnson' },
-    { id: 6, name: 'Charlie Brown', username: '@charliebrown' },
-    { id: 7, name: 'David Wilson', username: '@davidwilson' },
-    { id: 8, name: 'Eve Davis', username: '@evedavis' },
+    { id: 1, name: 'Complete Daily Challenge', reward: '100 coins', link: 'https://example.com/challenge' },
+    { id: 2, name: 'Invite a Friend', reward: '50 coins', link: 'https://example.com/invite' },
+    { id: 3, name: 'Watch an Ad', reward: '20 coins', link: 'https://example.com/ad' },
+    { id: 4, name: 'Reach Level 10', reward: '200 coins', link: 'https://example.com/levelup' },
+    { id: 5, name: 'Share on Social Media', reward: '30 coins', link: 'https://example.com/share' },
   ];
 
   const containerRef = useRef(null);
@@ -53,13 +43,16 @@ const Tasks = () => {
       <ul className="tasks-list">
         {tasksList.map((task) => (
           <li key={task.id} className="tasks-item">
-          <span className="tasks-name">{task.name}</span>
-          <button className="tasks-collect-button">Collect</button>
-        </li>
+            <span className="tasks-name">{task.name}</span>
+            <span className="tasks-reward">{task.reward}</span>
+            <a href={task.link} className="tasks-link" target="_blank" rel="noopener noreferrer">
+              <button className="tasks-collect-button">Collect</button>
+            </a>
+          </li>
         ))}
         <li className="tasks-item filler">
-        <span className="tasks-name">A</span>
-        <span className="tasks-username">A</span>
+          <span className="tasks-name">A</span>
+          <span className="tasks-username">A</span>
         </li>
       </ul>
     </div>
