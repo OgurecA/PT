@@ -36,8 +36,6 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
   };
 
   useEffect(() => {
-    localStorage.clear();
-
     if (!endTime) return; // Если конечное время не установлено, ничего не делаем
 
     const updateTimer = () => {
