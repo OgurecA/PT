@@ -16,6 +16,7 @@ const Tasks = () => {
     { id: 10, name: 'Share on Social Media', reward: '+30', link: 'https://example.com/share' },
   ];
 
+  const [loadingTasks, setLoadingTasks] = useState([]);
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -43,6 +44,15 @@ const Tasks = () => {
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleTaskClick = (taskId) => {
+    setLoadingTasks((prev) => [...prev, taskId]); // Добавляем задачу в массив загрузки
+
+    // Убираем задачу из массива загрузки через 5 секунд
+    setTimeout(() => {
+      setLoadingTasks((prev) => prev.filter((id) => id !== taskId));
+    }, 5000);
+  };
+
   return (
     <div className="tasks-container" ref={containerRef}>
       <ul className="tasks-list">
@@ -50,9 +60,17 @@ const Tasks = () => {
           <li key={task.id} className="tasks-item">
             <span className="tasks-name">{task.name}</span>
             <span className="tasks-reward">{task.reward}</span>
-            <a href={task.link} className="tasks-link" target="_blank" rel="noopener noreferrer">
-              <button className="tasks-collect-button">Collect</button>
-            </a>
+            <button
+              className={`tasks-collect-button ${loadingTasks.includes(task.id) ? 'loading' : ''}`}
+              onClick={() => handleTaskClick(task.id)}
+              disabled={loadingTasks.includes(task.id)} // Отключаем кнопку, если она в состоянии загрузки
+            >
+              {loadingTasks.includes(task.id) ? (
+                <div className="spinner"></div> // Если идет загрузка, показываем спиннер
+              ) : (
+                'Earn' // Иначе показываем текст "Earn"
+              )}
+            </button>
           </li>
         ))}
         <li className="tasks-item filler">

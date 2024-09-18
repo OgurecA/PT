@@ -73,6 +73,30 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
   }
+  .tasks-collect-button.loading {
+    background-color: #ccc; /* Цвет кнопки при загрузке */
+    cursor: not-allowed;
+  }
+  
+  /* Спиннер */
+  .spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 3px solid white;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Анимация спиннера */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
   
 
   
