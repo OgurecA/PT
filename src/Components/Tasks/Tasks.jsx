@@ -17,7 +17,7 @@ const Tasks = () => {
   ];
 
   const [loadingTasks, setLoadingTasks] = useState([]);  // Задачи, которые находятся в процессе загрузки
-  const [completedTasks, setCompletedTasks] = useState([]); // Задачи, которые завершены
+  const [collectedTasks, setCollectedTasks] = useState([]); // Задачи, которые завершены и собраны
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -46,12 +46,14 @@ const Tasks = () => {
   }, []);
 
   const handleTaskClick = (taskId) => {
+    if (collectedTasks.includes(taskId)) return; // Если уже собрано, ничего не делаем
+
     setLoadingTasks((prev) => [...prev, taskId]); // Добавляем задачу в массив загрузки
 
-    // Убираем задачу из массива загрузки через 5 секунд и добавляем в завершенные
+    // Убираем задачу из массива загрузки через 5 секунд и добавляем в собранные
     setTimeout(() => {
       setLoadingTasks((prev) => prev.filter((id) => id !== taskId));
-      setCompletedTasks((prev) => [...prev, taskId]); // Добавляем в завершенные задачи
+      setCollectedTasks((prev) => [...prev, taskId]); // Добавляем в собранные задачи
     }, 5000);
   };
 
@@ -62,23 +64,22 @@ const Tasks = () => {
           <li key={task.id} className="tasks-item">
             <span className="tasks-name">{task.name}</span>
             <span className="tasks-reward">{task.reward}</span>
-            <a href={task.link} target="_blank" rel="noopener noreferrer">
-              <button
-                className={`tasks-collect-button ${
-                  loadingTasks.includes(task.id) ? 'loading' :
-                  completedTasks.includes(task.id) ? 'completed' : ''
-                }`}
-                onClick={() => handleTaskClick(task.id)}
-              >
-                {loadingTasks.includes(task.id) ? (
-                  <div className="spinner"></div> // Если идет загрузка, показываем спиннер
-                ) : completedTasks.includes(task.id) ? (
-                  'Collect' // Если задача завершена, показываем "Collect"
-                ) : (
-                  'Earn' // Иначе показываем текст "Earn"
-                )}
-              </button>
-            </a>
+            <button
+              className={`tasks-collect-button ${
+                loadingTasks.includes(task.id) ? 'loading' :
+                collectedTasks.includes(task.id) ? 'collected' : ''
+              }`}
+              onClick={() => handleTaskClick(task.id)}
+              disabled={collectedTasks.includes(task.id)} // Отключаем кнопку, если задача собрана
+            >
+              {loadingTasks.includes(task.id) ? (
+                <div className="spinner"></div> // Если идет загрузка, показываем спиннер
+              ) : collectedTasks.includes(task.id) ? (
+                'Collected' // Если задача собрана, показываем "Collected"
+              ) : (
+                'Earn' // Иначе показываем текст "Earn"
+              )}
+            </button>
           </li>
         ))}
         <li className="tasks-item filler">

@@ -80,7 +80,12 @@
     background-color: #007bff; /* Синий цвет для завершенных задач */
     color: white;
   }
-  
+  .tasks-collect-button.collected {
+    background-color: gray; /* Серый цвет для завершенных задач */
+    color: white;
+    cursor: not-allowed;
+  }
+    
   
   /* Спиннер */
   .spinner {
