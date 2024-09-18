@@ -46,6 +46,9 @@
     font-weight: bold; /* Жирный шрифт для имени друга */
     color: #333; /* Цвет текста для имени */
   }
+  .tasks-reward {
+    text-align: right;
+  }
   .tasks-collect-button {
     padding: 10px 20px;
     background-color: #007bff;
