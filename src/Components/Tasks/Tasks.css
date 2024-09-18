@@ -76,7 +76,7 @@
   .tasks-collect-button.loading {
     background-color: #ccc;
   }
-  .tasks-collect-button.completed {
+  .tasks-collect-button.collect {
     background-color: #007bff; /* Синий цвет для завершенных задач */
     color: white;
   }

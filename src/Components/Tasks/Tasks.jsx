@@ -9,15 +9,12 @@ const Tasks = () => {
     { id: 3, name: 'Watch an Ad', reward: '+20', link: 'https://example.com/ad' },
     { id: 4, name: 'Reach Level 10', reward: '+200', link: 'https://example.com/levelup' },
     { id: 5, name: 'Share on Social Media', reward: '+30', link: 'https://example.com/share' },
-    { id: 6, name: 'Complete Daily Challenge', reward: '+100', link: 'https://example.com/challenge' },
-    { id: 7, name: 'Invite a Friend', reward: '+50', link: 'https://example.com/invite' },
-    { id: 8, name: 'Watch an Ad', reward: '+20', link: 'https://example.com/ad' },
-    { id: 9, name: 'Reach Level 10', reward: '+200', link: 'https://example.com/levelup' },
-    { id: 10, name: 'Share on Social Media', reward: '+30', link: 'https://example.com/share' },
   ];
 
   const [loadingTasks, setLoadingTasks] = useState([]);  // Задачи, которые находятся в процессе загрузки
-  const [collectedTasks, setCollectedTasks] = useState([]); // Задачи, которые завершены и собраны
+  const [collectTasks, setCollectTasks] = useState([]); // Задачи, которые можно собрать
+  const [collectedTasks, setCollectedTasks] = useState([]); // Задачи, которые уже собраны
+
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -45,16 +42,26 @@ const Tasks = () => {
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleTaskClick = (taskId) => {
+  const handleTaskClick = (taskId, link) => {
     if (collectedTasks.includes(taskId)) return; // Если уже собрано, ничего не делаем
+
+    // Открываем ссылку только если задача еще не собрана
+    if (!collectTasks.includes(taskId)) {
+      window.open(link, '_blank'); // Переход по ссылке
+    }
 
     setLoadingTasks((prev) => [...prev, taskId]); // Добавляем задачу в массив загрузки
 
-    // Убираем задачу из массива загрузки через 5 секунд и добавляем в собранные
+    // Через 5 секунд меняем кнопку на "Collect"
     setTimeout(() => {
       setLoadingTasks((prev) => prev.filter((id) => id !== taskId));
-      setCollectedTasks((prev) => [...prev, taskId]); // Добавляем в собранные задачи
+      setCollectTasks((prev) => [...prev, taskId]); // Добавляем задачу в "можно собрать"
     }, 5000);
+  };
+
+  const handleCollectClick = (taskId) => {
+    setCollectTasks((prev) => prev.filter((id) => id !== taskId)); // Убираем задачу из collect
+    setCollectedTasks((prev) => [...prev, taskId]); // Задача собрана
   };
 
   return (
@@ -67,17 +74,22 @@ const Tasks = () => {
             <button
               className={`tasks-collect-button ${
                 loadingTasks.includes(task.id) ? 'loading' :
+                collectTasks.includes(task.id) ? 'collect' :
                 collectedTasks.includes(task.id) ? 'collected' : ''
               }`}
-              onClick={() => handleTaskClick(task.id)}
+              onClick={() => collectTasks.includes(task.id) 
+                ? handleCollectClick(task.id) 
+                : handleTaskClick(task.id, task.link)}
               disabled={collectedTasks.includes(task.id)} // Отключаем кнопку, если задача собрана
             >
               {loadingTasks.includes(task.id) ? (
                 <div className="spinner"></div> // Если идет загрузка, показываем спиннер
+              ) : collectTasks.includes(task.id) ? (
+                'Collect' // После загрузки показываем "Collect"
               ) : collectedTasks.includes(task.id) ? (
                 'Collected' // Если задача собрана, показываем "Collected"
               ) : (
-                'Earn' // Иначе показываем текст "Earn"
+                'Earn' // Изначально показываем "Earn"
               )}
             </button>
           </li>
