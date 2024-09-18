@@ -21,6 +21,8 @@ function App() {
   const [userName, setUserName] = useState(null);
   const [isPremium, setPremium] = useState(false);
 
+  const [balanceLoading, setBalanceLoading] = useState(true);
+
   const [clicks, setClicks] = useState([]);
   const [balanceAmount, setBalanceAmount] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -54,13 +56,14 @@ function App() {
         .then(data => {
           if (data.points !== undefined) {
             setBalanceAmount(data.points);
+            setBalanceLoading(false); 
           } else {
             console.error('Ошибка: Не удалось получить баланс пользователя');
           }
         })
         .catch(error => console.error('Ошибка при получении баланса пользователя:', error));
     }
-  }, 1000);
+  }, 2000);
   
   // Очищаем таймер при размонтировании компонента или изменении userId
   return () => clearTimeout(timer);
@@ -106,6 +109,7 @@ function App() {
         isVisible={activeIndex === 0}
         balanceAmount={balanceAmount}
         setBalanceAmount={setBalanceAmount}
+        balanceLoading={balanceLoading}
       />
       {activeIndex === 0 && <Coin onClick={handleClick} />}
 

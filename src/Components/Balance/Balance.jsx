@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Balance.css'; // Импортируем CSS для стилизации
 
-const Balance = ({ isVisible, balanceAmount, setBalanceAmount }) => {
+const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading }) => {
   // Состояние для отслеживания таймера и видимости кнопки
   const [timer, setTimer] = useState('06:00:00'); // Инициализируем таймер на 6 часов
   const [isMining, setIsMining] = useState(false); // Состояние для отслеживания, идет ли майнинг
@@ -69,7 +69,11 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount }) => {
     <div className={`balance ${isVisible ? 'visible' : 'hidden'}`}>
       <div className="balance-header">
         <span className="balance-text">Your Balance</span>
-        <span className="balance-amount">{balanceAmount}</span>
+        {balanceLoading ? (
+          <div className="spinner"></div>
+        ) : (
+          <span className="balance-amount">{balanceAmount}</span>
+        )}
       </div>
       <button
         className={`balance-button ${isMining ? 'mining' : isCollected ? 'collect' : ''}`} // Добавляем класс в зависимости от состояния

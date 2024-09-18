@@ -29,9 +29,8 @@ const Personal = ({ userId }) => {
         })
         .catch((error) => {
           console.error('Ошибка при получении данных пользователя:', error);
-          setLoading(false); // Отключаем состояние загрузки даже в случае ошибки
         });
-    }, 3000);
+    }, 2000);
   
     // Очищаем таймер при размонтировании компонента или изменении userId
     return () => clearTimeout(timer);
