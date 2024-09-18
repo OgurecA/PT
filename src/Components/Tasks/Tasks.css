@@ -2,12 +2,12 @@
   position: fixed;
   width: 500px; /* Ширина контейнера */
   max-width: 80vw; /* Максимальная ширина контейнера */
-  height: 470px;
+  height: 440px;
   left: 50%;
   transform: translateX(-50%);
   overflow-y: auto;
   background-color: transparent; /* Цвет фона */
-  bottom: 80px;
+  bottom: 110px;
   scrollbar-width: none;
 }
   .tasks-container::-webkit-scrollbar {
@@ -84,6 +84,6 @@
   
   @media (min-width: 440px) {
     .tasks-container {
-        height: 520px;
+        height: 490px;
     }
   }
