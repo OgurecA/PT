@@ -74,8 +74,7 @@
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
   }
   .tasks-collect-button.loading {
-    background-color: #ccc; /* Цвет кнопки при загрузке */
-    padding: 0 5px;
+    background-color: #ccc;
   }
   
   /* Спиннер */

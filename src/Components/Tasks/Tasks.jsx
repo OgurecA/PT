@@ -60,17 +60,19 @@ const Tasks = () => {
           <li key={task.id} className="tasks-item">
             <span className="tasks-name">{task.name}</span>
             <span className="tasks-reward">{task.reward}</span>
-            <button
-              className={`tasks-collect-button ${loadingTasks.includes(task.id) ? 'loading' : ''}`}
-              onClick={() => handleTaskClick(task.id)}
-              disabled={loadingTasks.includes(task.id)} // Отключаем кнопку, если она в состоянии загрузки
-            >
-              {loadingTasks.includes(task.id) ? (
-                <div className="spinner"></div> // Если идет загрузка, показываем спиннер
-              ) : (
-                'Earn' // Иначе показываем текст "Earn"
-              )}
-            </button>
+            <a href={task.link} target="_blank" rel="noopener noreferrer">
+              <button
+                className={`tasks-collect-button ${loadingTasks.includes(task.id) ? 'loading' : ''}`}
+                onClick={() => handleTaskClick(task.id)}
+                disabled={loadingTasks.includes(task.id)} // Отключаем кнопку, если она в состоянии загрузки
+              >
+                {loadingTasks.includes(task.id) ? (
+                  <div className="spinner"></div> // Если идет загрузка, показываем спиннер
+                ) : (
+                  'Earn' // Иначе показываем текст "Earn"
+                )}
+              </button>
+            </a>
           </li>
         ))}
         <li className="tasks-item filler">
