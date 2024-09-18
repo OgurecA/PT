@@ -12,8 +12,6 @@ const Personal = ({ userId }) => {
 
   // Получение данных пользователя из базы данных
   useEffect(() => {
-    // Устанавливаем таймер на 5 секунд (5000 миллисекунд)
-    const timer = setTimeout(() => {
       fetch(`/get-user/${userId}`)
         .then((response) => response.json())
         .then((data) => {
@@ -29,10 +27,7 @@ const Personal = ({ userId }) => {
         .catch((error) => {
           console.error('Ошибка при получении данных пользователя:', error);
         });
-    }, 1000);
   
-    // Очищаем таймер при размонтировании компонента или изменении userId
-    return () => clearTimeout(timer);
   }, [userId]); // Перезапуск useEffect при изменении userId
   
 
