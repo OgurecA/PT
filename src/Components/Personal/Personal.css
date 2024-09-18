@@ -34,7 +34,7 @@
   .personal-name {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #333;
+    color: #b3b3b3;
   }
   
   .personal-username {
@@ -43,37 +43,29 @@
   }
   
 
-
-  .personal .skeleton-image {
-    width: 50px;
-    height: 50px;
-    background-color: #ccc;
+  .personal .spinner {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
     border-radius: 50%;
-    margin-right: 15px;
-    animation: skeleton-loading 1.5s infinite linear;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 10px;
   }
   
-  
-  .skeleton-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .skeleton-username {
-    font-size: 1rem;
-    color: #777;
-  }
-  
-  @keyframes skeleton-loading {
+  @keyframes spin {
     0% {
-      background-color: #ccc;
-    }
-    50% {
-      background-color: #e0e0e0;
+      transform: rotate(0deg);
     }
     100% {
-      background-color: #ccc;
+      transform: rotate(360deg);
     }
   }
+  
+  .personal .loading-text {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+  }
+  
   

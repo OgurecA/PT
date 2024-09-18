@@ -13,7 +13,6 @@ const Personal = ({ userId }) => {
 
   // Получение данных пользователя из базы данных
   useEffect(() => {
-    // Устанавливаем таймер на 5 секунд (5000 миллисекунд)
     const timer = setTimeout(() => {
       fetch(`/get-user/${userId}`)
         .then((response) => response.json())
@@ -41,8 +40,8 @@ const Personal = ({ userId }) => {
   return (
     <div className="personal">
       {loading ? (
-        // Полоска загрузки вместо изображения профиля
-        <div className="skeleton-image" />
+        // Отображаем spinner, пока данные загружаются
+        <div className="spinner"></div>
       ) : user.profileImage ? (
         <img src={user.profileImage} alt="User Profile" className="personal-image" />
       ) : (
@@ -51,10 +50,8 @@ const Personal = ({ userId }) => {
       
       <div className="personal-info">
         {loading ? (
-          <>
-            <div className="skeleton-text skeleton-name" />
-            <div className="skeleton-text skeleton-username" />
-          </>
+          // Пока данные загружаются, показываем только spinner
+          <div className="loading-text">Загрузка...</div>
         ) : (
           <>
             <span className="personal-name">{user.firstName} {user.lastName}</span>
