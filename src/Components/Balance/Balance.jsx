@@ -5,7 +5,11 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
   // Состояние для отслеживания таймера и видимости кнопки
   const [timer, setTimer] = useState('06:00:00'); // Инициализируем таймер на 6 часов
   const [isMining, setIsMining] = useState(false); // Состояние для отслеживания, идет ли майнинг
-  const [isCollected, setIsCollected] = useState(false);
+  const [isCollected, setIsCollected] = useState(() => {
+    // Восстанавливаем состояние "Collect" из localStorage
+    const savedIsCollected = localStorage.getItem('isCollected');
+    return savedIsCollected === 'true'; // Преобразуем строку в boolean
+  });
   const [endTime, setEndTime] = useState(() => {
     // Получаем конечное время из localStorage, если оно существует
     const savedEndTime = localStorage.getItem('endTime');
@@ -18,6 +22,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
       // Если можно нажать Collect, возвращаем кнопку к состоянию "Start mining"
       setBalanceAmount(balanceAmount + 100);
       setIsCollected(false);
+      localStorage.setItem('isCollected', 'false');
       setTimer('06:00:00'); // Сбрасываем таймер до начального значения
       localStorage.removeItem('endTime'); // Удаляем конечное время из localStorage
     } else {
@@ -37,6 +42,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
       if (remainingTime <= 0) {
         setIsMining(false); // Сбрасываем состояние майнинга
         setIsCollected(true); // Состояние, когда можно нажать Collect
+        localStorage.setItem('isCollected', 'true'); 
         setEndTime(null); // Удаляем конечное время
         localStorage.removeItem('endTime'); // Удаляем конечное время из localStorage
       } else {
