@@ -68,9 +68,10 @@ const Tasks = ({ balanceAmount, setBalanceAmount }) => {
     }, 5000);
   };
 
-  const handleCollectClick = (taskId) => {
+  const handleCollectClick = (taskId, reward) => {
     setCollectTasks((prev) => prev.filter((id) => id !== taskId)); // Убираем задачу из collect
     setCollectedTasks((prev) => [...prev, taskId]); // Задача собрана и сохраняется в collected
+    setBalanceAmount(balanceAmount + reward); // Увеличиваем баланс на сумму награды
   };
 
   return (
