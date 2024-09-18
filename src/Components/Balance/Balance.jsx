@@ -36,6 +36,8 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
   };
 
   useEffect(() => {
+    localStorage.clear();
+
     if (!endTime) return; // Если конечное время не установлено, ничего не делаем
 
     const updateTimer = () => {
@@ -76,7 +78,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
     // Делаем кнопку неактивной на 2.5 секунды
     const disableButtonTimeout = setTimeout(() => {
       setIsButtonDisabled(false);
-    }, 2300);
+    }, 300);
 
     return () => clearTimeout(disableButtonTimeout); // Очищаем таймер при размонтировании
   }, []);
