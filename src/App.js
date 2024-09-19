@@ -9,7 +9,7 @@ import Friends from './Components/Friends/Friends';
 import Wallet from './Components/Wallet/Wallet';
 import Tasks from './Components/Tasks/Tasks';
 import WebApp from '@twa-dev/sdk';
-import { TonConnectUIProvider, TonConnectButton } from '@tonconnect/ui-react';
+import { TonConnectUIProvider, TonConnectButton, useTonWallet, useTonConnectUI } from '@tonconnect/ui-react';
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
@@ -29,6 +29,19 @@ function App() {
   const [clicks, setClicks] = useState([]);
   const [balanceAmount, setBalanceAmount] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+
+
+  const [tonConnectUI] = useTonConnectUI();
+  const wallet = useTonWallet();  // Хук для отслеживания состояния кошелька
+
+  // Это состояние для отслеживания успешного подключения
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+
+  useEffect(() => {
+    if (wallet && wallet.account) {
+      setIsWalletConnected(true);  // Отмечаем, что кошелек подключен
+    }
+  }, [wallet]);
 
   const handleNavBarClick = (index) => {
     setActiveIndex(index);
@@ -108,6 +121,9 @@ const manifestUrl = "https://dragonlair.website/tonconnect-manifest.json"
     <TonConnectUIProvider manifestUrl="https://dragonlair.website/tonconnect-manifest.json" >
 
       <TonConnectButton />
+      {isWalletConnected && wallet && (
+          <p>Кошелек подключен: {wallet.account.address}</p>
+        )}
 
       <Personal userId={userId} />
 
