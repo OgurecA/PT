@@ -47,7 +47,7 @@
   transition: background-color 0.3s ease;
 }
 
-.wallet-button:hover {
+.wallet-button:active {
   background-color: #7d8fa4; /* Добавляем изменение цвета при наведении */
 }
 

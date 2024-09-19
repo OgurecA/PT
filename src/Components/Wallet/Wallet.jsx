@@ -18,7 +18,6 @@ const Wallet = () => {
 
   return (
     <div className="wallet">
-      <img src={WalletIcon} alt="Wallet Icon" className="wallet-image" />
       {walletAddress ? (
         <div className="wallet-address">
           <p>Wallet: {walletAddress}</p>
