@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Wallet.css'; // Импортируем CSS для стилизации
 import WalletIcon from '../Photo/Wallet.png';
 import { TonConnect } from "@tonconnect/sdk"; // Импортируем TonConnect для работы с кошельком
@@ -6,11 +6,25 @@ import { TonConnect } from "@tonconnect/sdk"; // Импортируем TonConne
 const Wallet = () => {
   const [walletAddress, setWalletAddress] = useState(null); // Состояние для хранения адреса кошелька
   const [isImageVisible, setImageVisible] = useState(true); // Состояние для управления видимостью изображения
-  const tonConnect = new TonConnect();
+  const [tonConnect, setTonConnect] = useState(null);
+
+  useEffect(() => {
+    // Инициализируем TonConnect при монтировании компонента
+    const tonConnectInstance = new TonConnect();
+    setTonConnect(tonConnectInstance);
+    console.log('TonConnect инициализирован');
+  }, []);
 
   const connectWallet = async () => {
+    if (!tonConnect) {
+      console.error('TonConnect не инициализирован');
+      return;
+    }
+
     try {
+      console.log('Подключение кошелька...');
       const wallet = await tonConnect.connectWallet(); // Подключаем кошелек
+      console.log('Кошелек подключен:', wallet);
       setWalletAddress(wallet.account); // Сохраняем адрес кошелька
     } catch (error) {
       console.error('Ошибка подключения кошелька:', error);
