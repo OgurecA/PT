@@ -12,22 +12,11 @@
     <link rel="apple-touch-icon" href="/logo192.png" />
     <link rel="manifest" href="/manifest.json" />
     <title>DragonLair</title>
-    <script src="https://unpkg.com/@tonconnect/ui@1.0.0-beta.5/dist/tonconnect-ui.min.js"></script>
 
   </head>
   <body>
 
-    <div id="connect-button-root" style="position: absolute; left: 0; top: 0; width: 40px; height: 20px;"></div>
-
-    <script>
-      const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-          manifestUrl: 'https://dragonlair.website/tonconnect-manifest.json',
-          buttonRootId: 'connect-button-root'
-      });
-
-      tonConnectUI.onStatusChange(console.log)
-  </script>
-    <div id="root" style="pointer-events: none; opacity: 0"></div>
+    <div id="root"></div>
 
 </body>
 </html>

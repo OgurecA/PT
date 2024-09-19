@@ -21,6 +21,10 @@
 }
 
 body {
+  background-image: url('./Components/Photo/Background2.png'); /* Укажите путь к вашему изображению */
+  background-size: cover; /* Опция для растягивания изображения по всему экрану */
+  background-repeat: no-repeat; /* Запрещает повторение изображения */
+  background-position: center; /* Центрирует изображение */
   height: 100vh;
   margin: 0; /* Убирает внешние отступы для body */
 }
