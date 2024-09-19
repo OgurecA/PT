@@ -116,7 +116,7 @@ const manifestUrl = "url"
 
       <Balance
         isVisible={activeIndex === 0}
-        balanceAmount={userFriendlyAddress}
+        balanceAmount={balanceAmount}
         setBalanceAmount={setBalanceAmount}
         balanceLoading={balanceLoading}
       />
