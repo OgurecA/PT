@@ -105,7 +105,7 @@ function App() {
   }
 const manifestUrl = "https://dragonlair.website/tonconnect-manifest.json"
   return (
-    <TonConnectUIProvider manifestUrl={manifestUrl} >
+    <TonConnectUIProvider manifestUrl="https://dragonlair.website/tonconnect-manifest.json" >
 
       <TonConnectButton />
 
