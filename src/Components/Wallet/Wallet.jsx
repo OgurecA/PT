@@ -1,11 +1,12 @@
 import React from 'react';
 import './Wallet.css'; // Импортируем CSS для стилизации
 import WalletIcon from '../Photo/Wallet.png'
+import { WalletAddress } from '../WalletAddress';
 
 const Wallet = () => {
   return (
     <div className="wallet">
-      <img src={WalletIcon} alt="Wallet Icon" className="wallet-image" />
+      <WalletAddress />
       <button className="wallet-button">Connect Wallet</button>
     </div>
   );
