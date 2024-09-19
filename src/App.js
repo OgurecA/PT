@@ -11,7 +11,6 @@ import Tasks from './Components/Tasks/Tasks';
 import WebApp from '@twa-dev/sdk';
 import { TonConnectUIProvider, TonConnectButton, useTonAddress } from '@tonconnect/ui-react';
 
-
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
 function App() {
@@ -108,6 +107,7 @@ const manifestUrl = "url"
   return (
     <TonConnectUIProvider manifestUrl="https://dragonlair.website/tonconnect-manifest.json" >
 
+      <TonConnectButton />
 
       <Personal userId={userId} />
 
