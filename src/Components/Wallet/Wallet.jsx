@@ -1,51 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import './Wallet.css'; // Импортируем CSS для стилизации
-import WalletIcon from '../Photo/Wallet.png';
-import { TonConnect } from "@tonconnect/sdk"; // Импортируем TonConnect для работы с кошельком
+import React, { useState } from 'react';
+import './Wallet.css'; // Для стилей
+import { TonConnect } from '@tonconnect/sdk'; // Импортируем SDK для подключения кошелька
 
 const Wallet = () => {
   const [walletAddress, setWalletAddress] = useState(null); // Состояние для хранения адреса кошелька
-  const [isImageVisible, setImageVisible] = useState(true); // Состояние для управления видимостью изображения
-  const [tonConnect, setTonConnect] = useState(null);
 
-  useEffect(() => {
-    // Инициализируем TonConnect при монтировании компонента
-    const tonConnectInstance = new TonConnect();
-    setTonConnect(tonConnectInstance);
-    console.log('TonConnect инициализирован');
-  }, []);
+  // Инициализируем TonConnect
+  const tonConnect = new TonConnect();
 
+  // Функция для подключения кошелька
   const connectWallet = async () => {
-    if (!tonConnect) {
-      console.error('TonConnect не инициализирован');
-      return;
-    }
-
     try {
-      console.log('Подключение кошелька...');
-      const wallet = await tonConnect.connectWallet(); // Подключаем кошелек
-      console.log('Кошелек подключен:', wallet);
-      setWalletAddress(wallet.account); // Сохраняем адрес кошелька
+      // Подключаем кошелек и получаем адрес
+      const wallet = await tonConnect.connectWallet();
+      setWalletAddress(wallet.account.address); // Сохраняем адрес кошелька в состояние
     } catch (error) {
-      console.error('Ошибка подключения кошелька:', error);
+      console.error('Ошибка подключения кошелька:', error); // Ловим ошибки, если что-то пошло не так
     }
-  };
-
-  // Функция для проверки, работает ли кнопка (скрывает изображение при нажатии)
-  const handleButtonClick = () => {
-    setImageVisible(false); // Делаем изображение невидимым
-    connectWallet(); // Вызываем функцию подключения кошелька
   };
 
   return (
     <div className="wallet">
-      {isImageVisible && <img src={WalletIcon} alt="Wallet Icon" className="wallet-image" />}
       {walletAddress ? (
         <div className="wallet-address">
-          <p>Wallet: {walletAddress}</p>
+          <p>Адрес кошелька: {walletAddress}</p>
         </div>
       ) : (
-        <button className="wallet-button" onClick={handleButtonClick}>Connect Wallet</button>
+        <button className="wallet-button" onClick={connectWallet}>
+          Подключить кошелек
+        </button>
       )}
     </div>
   );
