@@ -15,8 +15,6 @@ import DragonCoin from './Components/Photo/DragonCoin2.png';
 
 function App() {
 
-  const userFriendlyAddress = useTonAddress();
-  const rawAddress = useTonAddress(false);
 
 
   const [userData, setUserData] = useState(null);
@@ -110,7 +108,7 @@ const manifestUrl = "url"
   return (
     <TonConnectUIProvider manifestUrl="https://dragonlair.website/tonconnect-manifest.json" >
 
-      <TonConnectButton></TonConnectButton>
+      <TonConnectButton />
 
       <Personal userId={userId} />
 
