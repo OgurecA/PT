@@ -12,7 +12,7 @@ import WebApp from '@twa-dev/sdk';
 import { TonConnectUIProvider, TonConnectButton, useTonAddress } from '@tonconnect/ui-react';
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
-import { useTonConnect } from './Components/useTonConnect.ts';
+import { useTonConnect } from './Components/useTonConnect';
 
 function App() {
 
