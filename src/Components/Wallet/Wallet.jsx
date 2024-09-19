@@ -2,12 +2,12 @@ import React from 'react';
 import './Wallet.css'; // Импортируем CSS для стилизации
 import WalletIcon from '../Photo/Wallet.png'
 import { WalletAddress } from '../WalletAddress';
+import { useTonAddress } from '@tonconnect/ui-react';
 
 const Wallet = () => {
   return (
     <div className="wallet">
-      <WalletAddress />
-      <button className="wallet-button">Connect Wallet</button>
+      <button className="wallet-button">{useTonAddress}</button>
     </div>
   );
 };
