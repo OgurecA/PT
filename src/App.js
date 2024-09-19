@@ -9,11 +9,16 @@ import Friends from './Components/Friends/Friends';
 import Wallet from './Components/Wallet/Wallet';
 import Tasks from './Components/Tasks/Tasks';
 import WebApp from '@twa-dev/sdk';
-import { TonConnectUIProvider, TonConnectButton } from '@tonconnect/ui-react';
+import { TonConnectUIProvider, TonConnectButton, useTonAddress } from '@tonconnect/ui-react';
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
 function App() {
+
+  const userFriendlyAddress = useTonAddress();
+  const rawAddress = useTonAddress(false);
+
+
   const [userData, setUserData] = useState(null);
   const [userId, setUserId] = useState(null);
   const [lang, setLang] = useState(null);
@@ -103,7 +108,7 @@ function App() {
   }
 const manifestUrl = "url"
   return (
-    <TonConnectUIProvider manifestUrl={manifestUrl} >
+    <TonConnectUIProvider manifestUrl="https://dragonlair.website/tonconnect-manifest.json" >
 
       <TonConnectButton></TonConnectButton>
 
@@ -111,7 +116,7 @@ const manifestUrl = "url"
 
       <Balance
         isVisible={activeIndex === 0}
-        balanceAmount={balanceAmount}
+        balanceAmount={userFriendlyAddress}
         setBalanceAmount={setBalanceAmount}
         balanceLoading={balanceLoading}
       />
