@@ -19,7 +19,8 @@ const Wallet = () => {
 
   // Функция для проверки, работает ли кнопка (скрывает изображение при нажатии)
   const handleButtonClick = () => {
-    setImageVisible(false);
+    setImageVisible(false); // Делаем изображение невидимым
+    connectWallet(); // Вызываем функцию подключения кошелька
   };
 
   return (
