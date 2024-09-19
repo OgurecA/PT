@@ -9,6 +9,7 @@ import Friends from './Components/Friends/Friends';
 import Wallet from './Components/Wallet/Wallet';
 import Tasks from './Components/Tasks/Tasks';
 import WebApp from '@twa-dev/sdk';
+import { TonConnectUIProvider, TonConnectButton } from '@tonconnect/ui-react';
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
@@ -100,9 +101,12 @@ function App() {
 
     setClicks([...clicks, { id: Date.now(), x: imgX + x, y: imgY + y }]);
   }
-
+const manifestUrl = "url"
   return (
-    <>
+    <TonConnectUIProvider manifestUrl={manifestUrl} >
+
+      <TonConnectButton></TonConnectButton>
+
       <Personal userId={userId} />
 
       <Balance
@@ -135,7 +139,7 @@ function App() {
           <img src={DragonCoin} alt="" style={{ width: '70px', height: '70px' }} />
         </div>
       ))}
-    </>
+    </TonConnectUIProvider>
   );
 }
 
