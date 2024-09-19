@@ -10,7 +10,7 @@ import Wallet from './Components/Wallet/Wallet';
 import Tasks from './Components/Tasks/Tasks';
 import WebApp from '@twa-dev/sdk';
 import { TonConnectUIProvider, TonConnectButton, useTonAddress } from '@tonconnect/ui-react';
-import TonConnectUI from '@tonconnect/ui'
+
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
@@ -106,7 +106,7 @@ function App() {
   }
 const manifestUrl = "url"
   return (
-    <>
+    <TonConnectUIProvider manifestUrl="https://dragonlair.website/tonconnect-manifest.json" >
 
 
       <Personal userId={userId} />
@@ -141,7 +141,7 @@ const manifestUrl = "url"
           <img src={DragonCoin} alt="" style={{ width: '70px', height: '70px' }} />
         </div>
       ))}
-    </>
+    </TonConnectUIProvider>
   );
 }
 
