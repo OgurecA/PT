@@ -107,7 +107,6 @@ const manifestUrl = "url"
   return (
     <TonConnectUIProvider manifestUrl="https://dragonlair.website/tonconnect-manifest.json" >
 
-      <TonConnectButton />
 
       <Personal userId={userId} />
 
