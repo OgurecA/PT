@@ -53,3 +53,8 @@
     transform: translateX(-50%);
   }
   
+  .wallet-address {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }

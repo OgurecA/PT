@@ -76,7 +76,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
     // Делаем кнопку неактивной на 2.5 секунды
     const disableButtonTimeout = setTimeout(() => {
       setIsButtonDisabled(false);
-    }, 300);
+    }, 2300);
 
     return () => clearTimeout(disableButtonTimeout); // Очищаем таймер при размонтировании
   }, []);
