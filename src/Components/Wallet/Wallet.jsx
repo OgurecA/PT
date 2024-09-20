@@ -7,7 +7,9 @@ const Wallet = () => {
   return (
     <div className="wallet">
       <img src={WalletIcon} alt="Wallet Icon" className="wallet-image" />
-      <TonConnectButton className="wallet-button" disabled={true}></TonConnectButton>
+      <div style={{ pointerEvents: 'none' }}>
+        <TonConnectButton className="wallet-button"></TonConnectButton>
+      </div>
     </div>
   );
 };
