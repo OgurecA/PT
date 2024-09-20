@@ -3,6 +3,7 @@ import './Friends.css';
 
 const Friends = ({ userId, setInvitedBonus }) => {
   const [friendsList, setFriendsList] = useState([]);
+  const [collectedFriends, setCollectedFriends] = useState([]);
 
   useEffect(() => {
     // Запрос на сервер для получения друзей и их очков
@@ -12,13 +13,26 @@ const Friends = ({ userId, setInvitedBonus }) => {
         setFriendsList(data);
 
         // Рассчитываем 5% от очков каждого приглашенного и суммируем
-        const totalBonus = data.reduce((acc, friend) => acc + (friend.points * 0.05), 0);
+        const totalBonus = data.reduce((acc, friend) => acc + (friend.points * 0.1), 0);
 
         // Передаем общую сумму бонусных очков в App.js
         setInvitedBonus(totalBonus);
       })
       .catch(error => console.error('Ошибка при получении списка друзей:', error));
   }, [userId, setInvitedBonus]);
+
+  const handleCollectClick = (friend) => {
+    if (!collectedFriends.includes(friend.id)) {
+      // Рассчитываем бонус для этого друга (5% от его очков)
+      const bonus = friend.points * 0.1;
+
+      // Обновляем общий бонус
+      setInvitedBonus(prevBonus => prevBonus + bonus);
+
+      // Отмечаем друга как "собранного", чтобы не начислять бонус повторно
+      setCollectedFriends(prevCollected => [...prevCollected, friend.id]);
+    }
+  };
 
 
   const containerRef = useRef(null);
@@ -56,7 +70,11 @@ const Friends = ({ userId, setInvitedBonus }) => {
             <span className="friend-name">
               {friend.username ? friend.username : friend.name}
             </span>
-            <button className="collect-button">Collect {friend.points || 0}</button>
+            <button className="collect-button"
+                    onClick={handleCollectClick}
+                    disabled={collectedFriends.includes(friend.id)}>
+                      {collectedFriends.includes(friend.id) ? 'Collected' : `Collect ${friend.points || 0}`}
+            </button>
           </li>
         ))}
       </ul>

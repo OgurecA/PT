@@ -23,7 +23,7 @@ const Invite = ({ userId, invitedBonus }) => {
       <button className="invite-button" onClick={handleInviteClick}>
         Invite
       </button>
-      <p className="invite-footer-text">*Collect 5% of your friends earnings</p>
+      <p className="invite-footer-text">*Collect 10% of your friends earnings</p>
     </div>
   );
 };
