@@ -151,7 +151,7 @@ const manifestUrl = "https://dragonlair.website/tonconnect-manifest.json"
 
       <Balance
         isVisible={activeIndex === 0}
-        balanceAmount={balanceAmount}
+        balanceAmount={balanceAmount + invitedBonus}
         setBalanceAmount={setBalanceAmount}
         balanceLoading={balanceLoading}
       />

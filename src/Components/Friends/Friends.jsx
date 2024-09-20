@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Friends.css';
 
-const Friends = ({ userId, setInvitedBonus, invitedBonus }) => {
+const Friends = ({ userId, setInvitedBonus }) => {
   const [friendsList, setFriendsList] = useState([]);
   const [collectedFriends, setCollectedFriends] = useState(() => {
     // Инициализируем collectedFriends из localStorage или пустого объекта
@@ -10,6 +10,7 @@ const Friends = ({ userId, setInvitedBonus, invitedBonus }) => {
   });
 
   useEffect(() => {
+    localStorage.clear();
     // Запрос на сервер для получения друзей и их очков
     fetch(`/api/get-invited-friends?userId=${userId}`)
       .then(response => response.json())
