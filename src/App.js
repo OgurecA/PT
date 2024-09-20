@@ -120,7 +120,7 @@ const manifestUrl = "https://dragonlair.website/tonconnect-manifest.json"
 
       {activeIndex === 1 && <Tasks balanceAmount={balanceAmount} setBalanceAmount={setBalanceAmount} />}
 
-      {activeIndex === 2 && <Invite />}
+      {activeIndex === 2 && <Invite userId={userId} />}
       {activeIndex === 2 && <Friends />}
 
       {activeIndex === 3 && <Wallet />}

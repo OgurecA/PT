@@ -31,7 +31,7 @@
     max-width: 400px;
     left: 50%;
     transform: translateX(-50%);
-    top: 0;
+    top: 20px;
     pointer-events: none;
     position: fixed;
   }
@@ -41,7 +41,7 @@
     font-size: 18px;
     font-weight: bold;
     position: absolute;
-    top: 13px;
+    top: 20px;
     color: #fff; /* Изменить цвет текста */
     left: 50%;
     transform: translateX(-50%);
@@ -50,7 +50,7 @@
 
   .wallet-button {
     position: fixed;
-    bottom: 10%;
+    bottom: 5%;
     padding: 20px 30px;
     white-space: nowrap; /* Запрещаем перенос текста */
     width: 60%;
