@@ -1,23 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Friends.css';
 
-const Friends = ({ userId }) => {
+const Friends = ({ userId, setInvitedBonus }) => {
   const [friendsList, setFriendsList] = useState([]);
 
   useEffect(() => {
-    // Запрос на сервер для получения списка приглашённых друзей
-    const fetchFriends = async () => {
-      try {
-        const response = await fetch(`/api/get-invited-friends?userId=${userId}`);
-        const data = await response.json();
+    // Запрос на сервер для получения друзей и их очков
+    fetch(`/api/get-invited-friends?userId=${userId}`)
+      .then(response => response.json())
+      .then(data => {
         setFriendsList(data);
-      } catch (error) {
-        console.error('Ошибка при получении списка друзей:', error);
-      }
-    };
 
-    fetchFriends();
-  }, [userId]);
+        // Рассчитываем 5% от очков каждого приглашенного и суммируем
+        const totalBonus = data.reduce((acc, friend) => acc + (friend.points * 0.05), 0);
+
+        // Передаем общую сумму бонусных очков в App.js
+        setInvitedBonus(totalBonus);
+      })
+      .catch(error => console.error('Ошибка при получении списка друзей:', error));
+  }, [userId, setInvitedBonus]);
 
 
   const containerRef = useRef(null);

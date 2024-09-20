@@ -30,6 +30,8 @@ function App() {
   const [balanceAmount, setBalanceAmount] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const [invitedBonus, setInvitedBonus] = useState(0);
+
   const handleNavBarClick = (index) => {
     setActiveIndex(index);
   };
@@ -120,8 +122,8 @@ const manifestUrl = "https://dragonlair.website/tonconnect-manifest.json"
 
       {activeIndex === 1 && <Tasks balanceAmount={balanceAmount} setBalanceAmount={setBalanceAmount} />}
 
-      {activeIndex === 2 && <Invite userId={userId} />}
-      {activeIndex === 2 && <Friends userId={userId} />}
+      {activeIndex === 2 && <Invite userId={userId} invitedBonus={invitedBonus} />}
+      {activeIndex === 2 && <Friends userId={userId} setInvitedBonus={setInvitedBonus} />}
 
       {activeIndex === 3 && <Wallet />}
 
