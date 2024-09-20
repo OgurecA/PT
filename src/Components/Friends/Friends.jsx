@@ -5,16 +5,19 @@ const Friends = ({ userId }) => {
   const [friendsList, setFriendsList] = useState([]);
 
   useEffect(() => {
-    if (!userId) return; // Если userId отсутствует, ничего не делаем
+    // Запрос на сервер для получения списка приглашённых друзей
+    const fetchFriends = async () => {
+      try {
+        const response = await fetch(`/api/get-invited-friends?userId=${userId}`);
+        const data = await response.json();
+        setFriendsList(data);
+      } catch (error) {
+        console.error('Ошибка при получении списка друзей:', error);
+      }
+    };
 
-    // Отправляем запрос на сервер с userId
-    fetch(`/api/get-invited-friends?userId=${userId}`)
-      .then(response => response.json())
-      .then(data => {
-        setFriendsList(data); // Сохраняем список друзей
-      })
-      .catch(error => console.error('Ошибка загрузки списка друзей:', error));
-  }, [userId]); // Запрос зависит от userId
+    fetchFriends();
+  }, [userId]);
 
 
   const containerRef = useRef(null);
@@ -52,7 +55,7 @@ const Friends = ({ userId }) => {
             <span className="friend-name">
               {friend.username ? friend.username : friend.name}
             </span>
-            <button className="collect-button">Collect</button>
+            <button className="collect-button">Collect {friend.points || 0}</button>
           </li>
         ))}
       </ul>
