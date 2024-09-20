@@ -25,6 +25,9 @@ const Personal = ({ userId }) => {
               profileImage: data.profile_image_url || ''
             });
             setLoading(false);
+            if (userId === null) {
+              setLoading(true);
+            }
           }
         })
         .catch((error) => {

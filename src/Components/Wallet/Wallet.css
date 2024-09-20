@@ -40,7 +40,8 @@
     text-align: center;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
+    position: absolute;
+    top: 10px;
     color: #fff; /* Изменить цвет текста */
   }
   
