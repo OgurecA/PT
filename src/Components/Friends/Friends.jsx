@@ -1,19 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Friends.css';
 
 const Friends = () => {
-  const friendsList = [
-    { id: 1, name: 'Alice Smith', username: '@alicesmith' },
-    { id: 2, name: 'Bob Johnson', username: '@bobjohnson' },
-    { id: 3, name: 'Charlie Brown', username: '@charliebrown' },
-    { id: 4, name: 'David Wilson', username: '@davidwilson' },
-    { id: 5, name: 'Eve Davis', username: '@evedavis' },
-    { id: 1, name: 'Alice Smith', username: '@alicesmith' },
-    { id: 2, name: 'Bob Johnson', username: '@bobjohnson' },
-    { id: 3, name: 'Charlie Brown', username: '@charliebrown' },
-    { id: 4, name: 'David Wilson', username: '@davidwilson' },
-    { id: 5, name: 'Eve Davis', username: '@evedavis' },
-  ];
+  const [friendsList, setFriendsList] = useState([]);
+
+  useEffect(() => {
+    // Здесь ты можешь загрузить список приглашенных друзей с сервера.
+    fetch('/api/get-invited-friends') // Замени URL на реальный API
+      .then(response => response.json())
+      .then(data => {
+        setFriendsList(data); // Предполагается, что data — это массив объектов друзей
+      })
+      .catch(error => console.error('Ошибка загрузки списка друзей:', error));
+  }, []);
 
   const containerRef = useRef(null);
 
@@ -25,7 +24,7 @@ const Friends = () => {
       items.forEach((item) => {
         const rect = item.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
-        
+
         // Проверяем, находится ли элемент полностью в видимой области контейнера
         if (rect.bottom > containerRect.bottom || rect.top < containerRect.top) {
           item.classList.add('hidden');
@@ -47,7 +46,9 @@ const Friends = () => {
       <ul className="friends-list">
         {friendsList.map((friend) => (
           <li key={friend.id} className="friend-item">
-            <span className="friend-name">{friend.name}</span>
+            <span className="friend-name">
+              {friend.username ? friend.username : friend.name}
+            </span>
             <button className="collect-button">Collect</button>
           </li>
         ))}

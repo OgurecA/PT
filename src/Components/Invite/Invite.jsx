@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Invite.css'; // Импортируем CSS для стилизации
 
 const Invite = ({ userId }) => {
-  const botUrl = `https://t.me/DagonNewBot?start=${userId}`; // Ссылка на бота с ID пользователя
+  const botUrl = `https://t.me/DagonNewBot?start=referral_${userId}`; // Ссылка на бота с ID пользователя
 
   const handleInviteClick = () => {
     navigator.clipboard.writeText(botUrl)
