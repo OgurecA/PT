@@ -1,18 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Friends.css';
 
-const Friends = () => {
+const Friends = ({ userId }) => {
   const [friendsList, setFriendsList] = useState([]);
 
   useEffect(() => {
-    // Здесь ты можешь загрузить список приглашенных друзей с сервера.
-    fetch('/api/get-invited-friends') // Замени URL на реальный API
+    if (!userId) return; // Если userId отсутствует, ничего не делаем
+
+    // Отправляем запрос на сервер с userId
+    fetch(`/api/get-invited-friends?userId=${userId}`)
       .then(response => response.json())
       .then(data => {
-        setFriendsList(data); // Предполагается, что data — это массив объектов друзей
+        setFriendsList(data); // Сохраняем список друзей
       })
       .catch(error => console.error('Ошибка загрузки списка друзей:', error));
-  }, []);
+  }, [userId]); // Запрос зависит от userId
+
 
   const containerRef = useRef(null);
 

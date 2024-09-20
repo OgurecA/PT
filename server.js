@@ -140,6 +140,8 @@ app.get('/get-user-points', (req, res) => {
     });
   });
 
+
+
   
   app.post('/update-user-points', (req, res) => {
     const { userId, points } = req.body;
@@ -157,6 +159,31 @@ app.get('/get-user-points', (req, res) => {
 
 
 
+  
+
+  app.get('/api/get-invited-friends', (req, res) => {
+    const userId = req.query.userId; // Получаем userId из запроса
+  
+    if (!userId) {
+      return res.status(400).json({ error: 'userId не предоставлен' });
+    }
+  
+    const query = `
+      SELECT telegram_id AS id, first_name AS name, username
+      FROM users
+      WHERE invited_by = ?
+    `;
+  
+    db.all(query, [userId], (err, rows) => {
+      if (err) {
+        console.error('Ошибка при получении списка друзей:', err.message);
+        return res.status(500).json({ error: 'Ошибка сервера' });
+      }
+  
+      res.json(rows); // Отправляем список друзей на клиент
+    });
+  });
+  
 
 
 
