@@ -3,7 +3,7 @@ import './Friends.css';
 
 const Friends = ({ userId, setInvitedBonus }) => {
   const [friendsList, setFriendsList] = useState([]);
-  const [collectedFriends, setCollectedFriends] = useState([]);
+  const [collectedFriends, setCollectedFriends] = useState([]); // Для отслеживания собранных друзей
 
   useEffect(() => {
     // Запрос на сервер для получения друзей и их очков
@@ -11,15 +11,9 @@ const Friends = ({ userId, setInvitedBonus }) => {
       .then(response => response.json())
       .then(data => {
         setFriendsList(data);
-
-        // Рассчитываем 5% от очков каждого приглашенного и суммируем
-        const totalBonus = data.reduce((acc, friend) => acc + (friend.points * 0.1), 0);
-
-        // Передаем общую сумму бонусных очков в App.js
-        setInvitedBonus(totalBonus);
       })
       .catch(error => console.error('Ошибка при получении списка друзей:', error));
-  }, [userId, setInvitedBonus]);
+  }, [userId]);
 
   const handleCollectClick = (friend) => {
     if (!collectedFriends.includes(friend.id)) {
@@ -33,7 +27,6 @@ const Friends = ({ userId, setInvitedBonus }) => {
       setCollectedFriends(prevCollected => [...prevCollected, friend.id]);
     }
   };
-
 
   const containerRef = useRef(null);
 
@@ -70,10 +63,12 @@ const Friends = ({ userId, setInvitedBonus }) => {
             <span className="friend-name">
               {friend.username ? friend.username : friend.name}
             </span>
-            <button className="collect-button"
-                    onClick={handleCollectClick}
-                    disabled={collectedFriends.includes(friend.id)}>
-                      {collectedFriends.includes(friend.id) ? 'Collected' : `Collect ${friend.points || 0}`}
+            <button
+              className="collect-button"
+              onClick={() => handleCollectClick(friend)}
+              disabled={collectedFriends.includes(friend.id)} // Блокируем кнопку, если уже собрано
+            >
+              {collectedFriends.includes(friend.id) ? 'Collected' : `Collect ${friend.points || 0}`}
             </button>
           </li>
         ))}
