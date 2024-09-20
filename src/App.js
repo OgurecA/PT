@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import Coin from './Components/Coin/Coin';
@@ -11,71 +11,11 @@ import Friends from './Components/Friends/Friends';
 import Wallet from './Components/Wallet/Wallet';
 import Tasks from './Components/Tasks/Tasks';
 import WebApp from '@twa-dev/sdk';
-import { TonConnectUIProvider, TonConnectButton, useTonConnectUI } from '@tonconnect/ui-react';
-import { Address } from "ton-core";
-
+import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
 import DragonCoin from './Components/Photo/DragonCoin2.png';
 
 function App() {
-
-  const [tonConnectUI] = useTonConnectUI();
-  const [tonWalletAddress, setTonWalletAddress] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleWalletConnection = useCallback((address) => {
-    setTonWalletAddress(address);
-    console.log("Wallet connected successfully!");
-    setIsLoading(false);
-  }, []);
-
-  const handleWalletDisconnection = useCallback(() => {
-    setTonWalletAddress(null);  // Сбрасываем адрес кошелька
-    console.log("Wallet disconnected successfully!");  // Выводим сообщение об успешном отключении
-    setIsLoading(false);  // Останавливаем состояние загрузки
-  }, []);
-
-  useEffect(() => {
-    const checkWalletConnection = async () => {
-      if (tonConnectUI?.account?.address) {
-        handleWalletConnection(tonConnectUI.account.address);
-      } else {
-        handleWalletDisconnection();
-      }
-    };
-  
-    checkWalletConnection();
-  
-    const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
-      if (wallet) {
-        handleWalletConnection(wallet.account.address);
-      } else {
-        handleWalletDisconnection();
-      }
-    });
-  
-    return () => {
-      unsubscribe();
-    };
-  }, [tonConnectUI, handleWalletConnection, handleWalletDisconnection]);
-
-  const handleWalletAction = async () => {
-    if (tonConnectUI.connected) {
-      setIsLoading(true);
-      await tonConnectUI.disconnect();
-    } else {
-      await tonConnectUI.openModal();
-    }
-  };
-
-  const formatAddress = (address) => {
-    const tempAddress = Address.parse(address).toString();
-    return `${tempAddress.slice(0, 4)}...${tempAddress.slice(-4)}`;
-  };
-  
-  
-  
-  
 
 
   const [userData, setUserData] = useState(null);
@@ -169,29 +109,39 @@ const manifestUrl = "https://dragonlair.website/tonconnect-manifest.json"
   return (
     <TonConnectUIProvider manifestUrl="https://dragonlair.website/tonconnect-manifest.json" >
 
-      <main className="flex min-h-screen flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold mb-8">TON Connect Demo</h1>
 
-        {tonWalletAddress ? (
-          <div className="flex flex-col items-center">
-            <p className="mb-4">Connected: {formatAddress(tonWalletAddress)}</p>
-            <button
-              onClick={handleWalletAction}
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Disconnect Wallet
-            </button>
-          </div>
-        ) : (
-          <button
-            onClick={handleWalletAction}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Connect TON Wallet
-          </button>
-        )}
-      </main>
+      <Personal userId={userId} />
 
+      <Balance
+        isVisible={activeIndex === 0}
+        balanceAmount={balanceAmount}
+        setBalanceAmount={setBalanceAmount}
+        balanceLoading={balanceLoading}
+      />
+      {activeIndex === 0 && <Coin onClick={handleClick} />}
+
+      {activeIndex === 1 && <Tasks balanceAmount={balanceAmount} setBalanceAmount={setBalanceAmount} />}
+
+      {activeIndex === 2 && <Invite />}
+      {activeIndex === 2 && <Friends />}
+
+      {activeIndex === 3 && <Wallet />}
+
+      <NavBar onNavClick={handleNavBarClick} activeIndex={activeIndex} />
+      {clicks.map((click) => (
+        <div
+          key={click.id}
+          className="float"
+          style={{
+            top: `${click.y - 70}px`,
+            left: `${click.x - 20}px`,
+            opacity: 1,
+          }}
+          onAnimationEnd={() => handleAnimationEnd(click.id)}
+        >
+          <img src={DragonCoin} alt="" style={{ width: '70px', height: '70px' }} />
+        </div>
+      ))}
     </TonConnectUIProvider>
   );
 }

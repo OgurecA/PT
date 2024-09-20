@@ -1,60 +1,55 @@
 .wallet {
-  background-color: #0C0C0C;
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  bottom: 150px;
-  left: 50%; 
-  transform: translateX(-50%);
-  width: 80vw; 
-  max-width: 500px; 
-  padding: 10px 15px;
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  text-align: left; 
-  z-index: 1; 
-  height: 400px;
-}
-
-@media (min-width: 440px) {
-  .wallet {
-    bottom: 200px;
+    background-color: #0C0C0C;
+    background-size: cover; /* Опция для растягивания изображения по всему экрану */
+    background-repeat: no-repeat; /* Запрещает повторение изображения */
+    background-position: center;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    bottom: 150px;
+    left: 50%; /* Центрируем элемент по горизонтали */
+    transform: translateX(-50%); /* Смещаем элемент на половину его ширины для точного центрирования */
+    width: 80vw; /* Задаем ширину, чтобы почти вся ширина экрана была занята */
+    max-width: 500px; /* Максимальная ширина для больших экранов */
+    padding: 10px 15px;
+    border-radius: 10px; /* Скругление углов */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+    text-align: left; /* Центрируем текст */
+    z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
+    height: 400px;
   }
-}
+  
+  @media (min-width: 440px) {
+    .wallet {
+        bottom: 200px;
+    }
+  }
 
-.wallet-image {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto; /* Центрируем изображение */
-  pointer-events: none; 
-  position: relative; /* Изменяем на relative, чтобы избежать перекрытия кнопки */
-}
+  .wallet-image {
+    width: 100%;
+    max-width: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    pointer-events: none;
+    position: fixed;
+  }
 
-.wallet-button {
-  position: relative; /* Изменяем на relative для нормального позиционирования */
-  bottom: 0; /* Убираем фиксированную позицию */
-  margin: 20px auto 0; /* Центрируем кнопку и добавляем отступы */
-  padding: 20px 30px;
-  white-space: nowrap; 
-  width: 60%;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #90a5bc;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.wallet-button:active {
-  background-color: #7d8fa4; /* Добавляем изменение цвета при наведении */
-}
-
-.wallet-address {
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff; /* Изменяем цвет текста, чтобы было видно на темном фоне */
-  text-align: center;
-  margin-top: 20px;
-}
+  .wallet-button {
+    position: fixed;
+    bottom: 10%;
+    padding: 20px 30px;
+    white-space: nowrap; /* Запрещаем перенос текста */
+    width: 60%;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #90a5bc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
