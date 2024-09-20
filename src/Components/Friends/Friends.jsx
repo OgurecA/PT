@@ -3,7 +3,7 @@ import './Friends.css';
 
 const Friends = ({ userId, setInvitedBonus }) => {
   const [friendsList, setFriendsList] = useState([]);
-  const [collectedFriends, setCollectedFriends] = useState([]); // Для отслеживания собранных друзей
+  const [collectedFriends, setCollectedFriends] = useState({}); // Храним последние собранные очки для каждого друга
 
   useEffect(() => {
     // Запрос на сервер для получения друзей и их очков
@@ -16,15 +16,20 @@ const Friends = ({ userId, setInvitedBonus }) => {
   }, [userId]);
 
   const handleCollectClick = (friend) => {
-    if (!collectedFriends.includes(friend.id)) {
-      // Рассчитываем бонус для этого друга (5% от его очков)
-      const bonus = friend.points * 0.1;
+    const previousPoints = collectedFriends[friend.id] || 0; // Получаем предыдущее количество очков
+
+    if (friend.points > previousPoints) {
+      const newPoints = friend.points - previousPoints; // Вычисляем разницу в очках
+      const bonus = newPoints * 0.1; // Рассчитываем бонус
 
       // Обновляем общий бонус
       setInvitedBonus(prevBonus => prevBonus + bonus);
 
-      // Отмечаем друга как "собранного", чтобы не начислять бонус повторно
-      setCollectedFriends(prevCollected => [...prevCollected, friend.id]);
+      // Сохраняем новое количество очков для этого друга
+      setCollectedFriends(prevCollected => ({
+        ...prevCollected,
+        [friend.id]: friend.points // Обновляем очки для конкретного друга
+      }));
     }
   };
 
@@ -66,9 +71,9 @@ const Friends = ({ userId, setInvitedBonus }) => {
             <button
               className="collect-button"
               onClick={() => handleCollectClick(friend)}
-              disabled={collectedFriends.includes(friend.id)} // Блокируем кнопку, если уже собрано
+              disabled={friend.points === (collectedFriends[friend.id] || 0)} // Блокируем кнопку, если очки не изменились
             >
-              {collectedFriends.includes(friend.id) ? 'Collected' : `Collect ${friend.points || 0}`}
+              {friend.points === (collectedFriends[friend.id] || 0) ? 'Collected' : `Collect ${(friend.points - (collectedFriends[friend.id] || 0)) * 0.1 || 0}`}
             </button>
           </li>
         ))}
