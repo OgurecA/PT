@@ -10,7 +10,6 @@ const Friends = ({ userId, setInvitedBonus }) => {
   });
 
   useEffect(() => {
-    localStorage.clear();
     // Запрос на сервер для получения друзей и их очков
     fetch(`/api/get-invited-friends?userId=${userId}`)
       .then(response => response.json())
