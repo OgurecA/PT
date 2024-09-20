@@ -90,6 +90,43 @@ function App() {
   }, [balanceAmount]); // Следит за изменением balanceAmount
 
 
+  useEffect(() => {
+    if (userId) {
+      fetch('/update-invited-bonus', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, invitedBonus }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log('Бонус от приглашенных обновлен:', data))
+        .catch((error) => console.error('Ошибка при обновлении бонуса от приглашенных:', error));
+    }
+  }, [invitedBonus]);
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (userId) {
+        // Запрос на сервер для получения бонуса от приглашённых друзей
+        fetch(`/get-invited-bonus?userId=${userId}`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.bonus !== undefined) {
+              setInvitedBonus(data.bonus); // Устанавливаем бонус, полученный с сервера
+            } else {
+              console.error('Ошибка: Не удалось получить бонус от приглашённых');
+            }
+          })
+          .catch((error) => console.error('Ошибка при получении бонуса от приглашённых:', error));
+      }
+    }, 1000);
+  
+    return () => clearTimeout(timer); // Очищаем таймер при демонтировании или изменении userId
+  }, [userId]);
+  
+
 
   function handleAnimationEnd(id) {
     setClicks((prevClicks) => prevClicks.filter(click => click.id !== id));
@@ -123,7 +160,7 @@ const manifestUrl = "https://dragonlair.website/tonconnect-manifest.json"
       {activeIndex === 1 && <Tasks balanceAmount={balanceAmount} setBalanceAmount={setBalanceAmount} />}
 
       {activeIndex === 2 && <Invite userId={userId} invitedBonus={invitedBonus} />}
-      {activeIndex === 2 && <Friends userId={userId} setInvitedBonus={setInvitedBonus} />}
+      {activeIndex === 2 && <Friends userId={userId} invitedBonus={invitedBonus} setInvitedBonus={setInvitedBonus} />}
 
       {activeIndex === 3 && <Wallet />}
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Friends.css';
 
-const Friends = ({ userId, setInvitedBonus }) => {
+const Friends = ({ userId, setInvitedBonus, invitedBonus }) => {
   const [friendsList, setFriendsList] = useState([]);
   const [collectedFriends, setCollectedFriends] = useState(() => {
     // Инициализируем collectedFriends из localStorage или пустого объекта

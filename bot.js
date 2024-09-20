@@ -22,8 +22,8 @@ const db = new sqlite3.Database('./dragonlair.db', (err) => {
 // Функция добавления или обновления пользователя в базе данных
 const addUserOrUpdate = (user) => {
   const query = `
-    INSERT INTO users (telegram_id, first_name, last_name, username, language_code, is_premium, profile_image_url, points, invited_by)
-    VALUES (?, ?, ?, ?, ?, ?, ?, 0, ?)
+    INSERT INTO users (telegram_id, first_name, last_name, username, language_code, is_premium, profile_image_url, points, invited_bonus, invited_by)
+    VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0, ?)
     ON CONFLICT(telegram_id) DO UPDATE SET
     first_name = excluded.first_name,
     last_name = excluded.last_name,

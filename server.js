@@ -86,6 +86,7 @@ const db = new sqlite3.Database('./dragonlair.db', (err) => {
     is_premium TEXT,
     profile_image_url TEXT,
     points INTEGER DEFAULT 0,
+    invited_bonus INTEGER DEFAULT 0,
     invited_by INTEGER
   );`, (err) => {
     if (err) {
@@ -185,7 +186,56 @@ app.get('/api/get-invited-friends', (req, res) => {
 });
 
 
+app.post('/update-invited-bonus', (req, res) => {
+  const { userId, invitedBonus } = req.body; // Получаем userId и invitedBonus из тела запроса
 
+  if (!userId || invitedBonus === undefined) {
+    return res.status(400).json({ error: 'Необходимо предоставить userId и invitedBonus' });
+  }
+
+  const query = `
+    UPDATE users
+    SET invited_bonus = ?
+    WHERE telegram_id = ?
+  `;
+
+  db.run(query, [invitedBonus, userId], function (err) {
+    if (err) {
+      console.error('Ошибка при обновлении бонуса от приглашённых:', err.message);
+      return res.status(500).json({ error: 'Ошибка сервера при обновлении бонуса' });
+    }
+
+    res.json({ message: 'Бонус от приглашённых обновлён' });
+  });
+});
+
+// Обработка GET-запроса для получения invitedBonus
+app.get('/get-invited-bonus', (req, res) => {
+  const { userId } = req.query; // Получаем userId из строки запроса
+
+  if (!userId) {
+    return res.status(400).json({ error: 'Необходимо предоставить userId' });
+  }
+
+  const query = `
+    SELECT invited_bonus AS bonus
+    FROM users
+    WHERE telegram_id = ?
+  `;
+
+  db.get(query, [userId], (err, row) => {
+    if (err) {
+      console.error('Ошибка при получении бонуса от приглашённых:', err.message);
+      return res.status(500).json({ error: 'Ошибка сервера при получении бонуса' });
+    }
+
+    if (row) {
+      res.json({ bonus: row.bonus });
+    } else {
+      res.status(404).json({ error: 'Пользователь не найден' });
+    }
+  });
+});
 
 
 
