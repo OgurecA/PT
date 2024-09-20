@@ -41,8 +41,10 @@
     font-size: 18px;
     font-weight: bold;
     position: absolute;
-    top: 10px;
+    top: 13px;
     color: #fff; /* Изменить цвет текста */
+    left: 50%;
+    transform: translateX(-50%);
   }
   
 
