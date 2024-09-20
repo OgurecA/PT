@@ -5,7 +5,7 @@ const TelegramBot = require('node-telegram-bot-api');
 require('dotenv').config();
 
 const app = express();
-const token = process.env.BOT_TOKEN || "7269280461:AAGWQbVyIWN4lk2MlxbBjLXjST1LMqHcSDM";
+const token = process.env.BOT_TOKEN || "7269280461:AAGWQbVyIWN4lk2MlxbBjLXjST1LMqHcSDM"; // Убедитесь, что ваш токен корректен
 
 // Создаем экземпляр бота
 const bot = new TelegramBot(token, { polling: true });
@@ -48,12 +48,13 @@ const addUserOrUpdate = (user) => {
 // Middleware для обработки JSON-данных
 app.use(bodyParser.json());
 
+
 bot.onText(/\/start(?: referral_(\d+))?/, async (msg, match) => {
   const chatId = msg.chat.id;
   const firstName = msg.from.first_name;
   const languageCode = msg.from.language_code;
   const userId = msg.from.id;
-  const invitedBy = match[1] || null; // ID пригласившего пользователя, если есть
+  const invitedBy = match[1] || null;
 
   let profileImageUrl = ''; // По умолчанию пустой URL
 
@@ -77,14 +78,14 @@ bot.onText(/\/start(?: referral_(\d+))?/, async (msg, match) => {
     language_code: languageCode,
     is_premium: msg.from.is_premium ? "yes" : "no",
     profile_image_url: profileImageUrl,
-    invited_by: invitedBy // ID пригласившего пользователя
+    invited_by: invitedBy
   });
 
   const userInfo = `
     ID: ${userId}
     Имя: ${firstName} ${msg.from.last_name || ''}
     Имя пользователя: ${msg.from.username || ''}
-    Язык: ${languageCode}
+    Язык: "https://t.me/DagonNewBot/Dagon"
     Премиум: ${msg.from.is_premium ? "yes" : "no"}
     Фото профиля: ${profileImageUrl || 'Нет фото'}
     Приглашён пользователем: ${invitedBy ? `Пользователь с ID: ${invitedBy}` : 'Нет'}
@@ -94,3 +95,4 @@ bot.onText(/\/start(?: referral_(\d+))?/, async (msg, match) => {
     console.error("Ошибка отправки сообщения:", error);
   });
 });
+
