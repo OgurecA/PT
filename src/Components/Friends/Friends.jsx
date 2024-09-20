@@ -3,7 +3,11 @@ import './Friends.css';
 
 const Friends = ({ userId, setInvitedBonus }) => {
   const [friendsList, setFriendsList] = useState([]);
-  const [collectedFriends, setCollectedFriends] = useState({}); // Храним последние собранные очки для каждого друга
+  const [collectedFriends, setCollectedFriends] = useState(() => {
+    // Инициализируем collectedFriends из localStorage или пустого объекта
+    const savedData = localStorage.getItem(`collectedFriends_${userId}`);
+    return savedData ? JSON.parse(savedData) : {};
+  });
 
   useEffect(() => {
     // Запрос на сервер для получения друзей и их очков
@@ -25,11 +29,13 @@ const Friends = ({ userId, setInvitedBonus }) => {
       // Обновляем общий бонус
       setInvitedBonus(prevBonus => prevBonus + bonus);
 
-      // Сохраняем новое количество очков для этого друга
-      setCollectedFriends(prevCollected => ({
-        ...prevCollected,
-        [friend.id]: friend.points // Обновляем очки для конкретного друга
-      }));
+      // Обновляем очки для конкретного друга и сохраняем их в localStorage
+      const updatedCollectedFriends = {
+        ...collectedFriends,
+        [friend.id]: friend.points // Сохраняем текущее количество очков
+      };
+      setCollectedFriends(updatedCollectedFriends);
+      localStorage.setItem(`collectedFriends_${userId}`, JSON.stringify(updatedCollectedFriends));
     }
   };
 
