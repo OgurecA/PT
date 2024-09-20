@@ -36,6 +36,15 @@
     position: fixed;
   }
 
+  .wallet-coming-soon {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff; /* Изменить цвет текста */
+  }
+  
+
   .wallet-button {
     position: fixed;
     bottom: 10%;

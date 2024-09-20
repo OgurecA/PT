@@ -24,7 +24,7 @@ const Personal = ({ userId }) => {
               username: data.username,
               profileImage: data.profile_image_url || ''
             });
-            setLoading(false); // Отключаем состояние загрузки после получения данных
+            setLoading(false);
           }
         })
         .catch((error) => {
@@ -38,28 +38,23 @@ const Personal = ({ userId }) => {
 
   return (
     <div className="personal">
-      {loading ? (
-        // Отображаем spinner, пока данные загружаются
+      {loading || !user ? (
+        // Отображаем spinner, пока данные загружаются или если данные пользователя отсутствуют
         <div className="spinner"></div>
-      ) : user.profileImage ? (
-        <img src={user.profileImage} alt="User Profile" className="personal-image" />
       ) : (
-        <img src={DragonCoin} alt="Default Profile" className="personal-image" />
-      )}
-      
-      <div className="personal-info">
-        {loading ? (
-          // Пока данные загружаются, показываем только spinner
-          <div className="loading-text"></div>
-        ) : (
-          <>
+        <>
+          {user.profileImage && (
+            <img src={user.profileImage} alt="User Profile" className="personal-image" />
+          )}
+          <div className="personal-info">
             <span className="personal-name">{user.firstName} {user.lastName}</span>
             <span className="personal-username">@{user.username}</span>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
+  
 };
 
 export default Personal;
