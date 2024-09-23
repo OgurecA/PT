@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Balance.css'; // Импортируем CSS для стилизации
 
-const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading }) => {
+const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading, invitedBonus }) => {
   // Состояние для отслеживания таймера и видимости кнопки
   const [timer, setTimer] = useState('06:00:00'); // Инициализируем таймер на 6 часов
   const [isMining, setIsMining] = useState(false); // Состояние для отслеживания, идет ли майнинг
@@ -88,7 +88,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading })
         {balanceLoading ? (
           <div className="spinner"></div>
         ) : (
-          <span className="balance-amount">{balanceAmount}</span>
+          <span className="balance-amount">{balanceAmount + invitedBonus}</span>
         )}
       </div>
       <button
