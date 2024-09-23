@@ -147,31 +147,17 @@ app.get('/get-user-points', (req, res) => {
   
   app.post('/update-user-points', (req, res) => {
     const { userId, points } = req.body;
+    const query = `UPDATE users SET points = ? WHERE telegram_id = ?`;
   
-    // Сначала получаем текущий invited_bonus пользователя
-    const getBonusQuery = `SELECT invited_bonus FROM users WHERE telegram_id = ?`;
-    db.get(getBonusQuery, [userId], (err, row) => {
+    db.run(query, [points, userId], function (err) {
       if (err) {
-        console.error('Ошибка при получении бонуса:', err.message);
-        return res.status(500).json({ error: 'Ошибка сервера' });
+        console.error('Ошибка при обновлении очков пользователя:', err.message);
+        res.status(500).json({ error: 'Ошибка сервера' });
+      } else {
+        res.json({ message: 'Очки пользователя обновлены успешно' });
       }
-  
-      const invitedBonus = row.invited_bonus || 0;
-      const totalPoints = points + invitedBonus;
-  
-      // Обновляем points и total_points
-      const updateQuery = `UPDATE users SET points = ?, total_points = ? WHERE telegram_id = ?`;
-      db.run(updateQuery, [points, totalPoints, userId], function (err) {
-        if (err) {
-          console.error('Ошибка при обновлении очков пользователя:', err.message);
-          return res.status(500).json({ error: 'Ошибка сервера' });
-        }
-  
-        res.json({ message: 'Очки пользователя и общие очки успешно обновлены' });
-      });
     });
   });
-  
 
 
 
@@ -202,36 +188,27 @@ app.get('/api/get-invited-friends', (req, res) => {
 
 
 app.post('/update-invited-bonus', (req, res) => {
-  const { userId, invitedBonus } = req.body;
+  const { userId, invitedBonus } = req.body; // Получаем userId и invitedBonus из тела запроса
 
   if (!userId || invitedBonus === undefined) {
     return res.status(400).json({ error: 'Необходимо предоставить userId и invitedBonus' });
   }
 
-  // Сначала получаем текущие points пользователя
-  const getPointsQuery = `SELECT points FROM users WHERE telegram_id = ?`;
-  db.get(getPointsQuery, [userId], (err, row) => {
+  const query = `
+    UPDATE users
+    SET invited_bonus = ?
+    WHERE telegram_id = ?
+  `;
+
+  db.run(query, [invitedBonus, userId], function (err) {
     if (err) {
-      console.error('Ошибка при получении очков:', err.message);
-      return res.status(500).json({ error: 'Ошибка сервера' });
+      console.error('Ошибка при обновлении бонуса от приглашённых:', err.message);
+      return res.status(500).json({ error: 'Ошибка сервера при обновлении бонуса' });
     }
 
-    const points = row.points || 0;
-    const totalPoints = points + invitedBonus;
-
-    // Обновляем invited_bonus и total_points
-    const updateQuery = `UPDATE users SET invited_bonus = ?, total_points = ? WHERE telegram_id = ?`;
-    db.run(updateQuery, [invitedBonus, totalPoints, userId], function (err) {
-      if (err) {
-        console.error('Ошибка при обновлении бонуса от приглашённых:', err.message);
-        return res.status(500).json({ error: 'Ошибка сервера при обновлении бонуса' });
-      }
-
-      res.json({ message: 'Бонус от приглашённых и общие очки обновлены' });
-    });
+    res.json({ message: 'Бонус от приглашённых обновлён' });
   });
 });
-
 
 // Обработка GET-запроса для получения invitedBonus
 app.get('/get-invited-bonus', (req, res) => {
