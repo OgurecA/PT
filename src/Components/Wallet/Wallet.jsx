@@ -1,20 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Wallet.css'; // Импортируем CSS для стилизации
-import WalletIcon from '../Photo/Wallet.png'
-import { TonConnectButton } from '@tonconnect/ui-react';
+import WalletIcon from '../Photo/Wallet.png'; // Импортируем иконку кошелька
+import { Provider, Contract, defaultProvider } from 'starknet'; // Импортируем из starknet.js
 
 const Wallet = () => {
+  const [account, setAccount] = useState<string | null>(null); // Состояние для хранения адреса кошелька
+
+  // Функция для подключения кошелька StarkNet
+  const connectWallet = async () => {
+    try {
+      if (window.starknet) {
+        await window.starknet.enable(); // Запрашиваем доступ к кошельку
+        const accountAddress = window.starknet.selectedAddress || null; // Получаем адрес кошелька
+        setAccount(accountAddress); // Сохраняем адрес в состояние
+        console.log('Подключённый аккаунт:', accountAddress);
+      } else {
+        alert('Кошелек StarkNet не найден. Установите Argent X или Braavos.');
+      }
+    } catch (error) {
+      console.error('Ошибка подключения к StarkNet кошельку:', error);
+    }
+  };
+
   return (
     <div className="wallet">
       <img src={WalletIcon} alt="Wallet Icon" className="wallet-image" />
-
-      <div className="wallet-coming-soon">
-        <h3>Coming soon!</h3>
-      </div>
-
-      <div style={{ pointerEvents: 'none' }}>
-        <TonConnectButton className="wallet-button"></TonConnectButton>
-      </div>
+      {!account ? (
+        <button className="wallet-button" onClick={connectWallet}>
+          Подключить кошелек StarkNet
+        </button>
+      ) : (
+        <p>Ваш аккаунт: {account}</p>
+      )}
     </div>
   );
 };

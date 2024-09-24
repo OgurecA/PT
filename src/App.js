@@ -142,9 +142,9 @@ function App() {
 
     setClicks([...clicks, { id: Date.now(), x: imgX + x, y: imgY + y }]);
   }
-const manifestUrl = "https://dragonlair.website/tonconnect-manifest.json"
+  
   return (
-    <TonConnectUIProvider manifestUrl="https://dragonlair.website/tonconnect-manifest.json" >
+    <>
 
 
       <Personal userId={userId} />
@@ -180,7 +180,7 @@ const manifestUrl = "https://dragonlair.website/tonconnect-manifest.json"
           <img src={DragonCoin} alt="" style={{ width: '70px', height: '70px' }} />
         </div>
       ))}
-    </TonConnectUIProvider>
+    </>
   );
 }
 
