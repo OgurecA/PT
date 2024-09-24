@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './Wallet.css'; // Импортируем CSS для стилизации
 import WalletIcon from '../Photo/Wallet.png'; // Импортируем иконку кошелька
-import { Provider, Contract, defaultProvider } from 'starknet'; // Импортируем из starknet.js
 
 const Wallet = () => {
-  const [account, setAccount] = useState<string | null>(null); // Состояние для хранения адреса кошелька
+  const [account, setAccount] = useState(null); // Убираем типизацию, просто используем состояние
 
   // Функция для подключения кошелька StarkNet
   const connectWallet = async () => {
