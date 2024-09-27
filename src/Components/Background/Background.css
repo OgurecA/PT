@@ -3,8 +3,8 @@
     position: fixed; /* Фиксируем блок, чтобы он не двигался при прокрутке */
     top: 0;
     left: 0;
-    width: 100vw; /* Занимает всю ширину экрана */
-    height: 100vh;
+    width: 110vw; /* Занимает всю ширину экрана */
+    height: 110vh;
     background-size: cover; /* Опция для растягивания изображения по всему экрану */
     background-repeat: no-repeat; /* Запрещает повторение изображения */
     background-position: center; /* Центрирует изображение */
