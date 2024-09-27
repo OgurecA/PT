@@ -30,7 +30,7 @@
     margin-bottom: 8px; /* Отступ между элементами */
     border: 1px solid #ccc; /* Рамка для каждого элемента списка */
     border-radius: 5px; /* Скругленные углы для каждого элемента списка */
-    background-color: #f9f9f9; /* Цвет фона каждого элемента списка */
+    background-color: rgba(255, 240, 210, 0.7); /* Цвет фона каждого элемента списка */
     transition: opacity 0.5s ease, background-color 0.3s ease;
     opacity: 1;
   }
@@ -53,7 +53,7 @@
   }
   .collect-button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #ff9f38;
     color: white;
     border: none;
     border-radius: 5px;

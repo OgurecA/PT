@@ -28,7 +28,7 @@
     margin-bottom: 10px;
     border: 1px solid #ddd; /* Светлая рамка */
     border-radius: 8px;
-    background-color: #fff; /* Белый фон */
+    background-color: rgba(255, 240, 210, 0.7);
     transition: opacity 0.5s ease, background-color 0.3s ease, transform 0.3s ease;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Легкая тень для каждого элемента */
   }
@@ -64,7 +64,7 @@
   /* Стиль кнопки */
   .tasks-collect-button {
     padding: 8px 16px;
-    background-color: #28a745; /* Зеленый цвет кнопки */
+    background-color: #ff9f38; /* Зеленый цвет кнопки */
     color: white;
     font-size: 14px;
     border: none;
@@ -74,14 +74,14 @@
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
   }
   .tasks-collect-button.loading {
-    background-color: #ccc;
+    background-color: #c67723;
   }
   .tasks-collect-button.collect {
-    background-color: #007bff; /* Синий цвет для завершенных задач */
+    background-color: #ff890b; /* Синий цвет для завершенных задач */
     color: white;
   }
   .tasks-collect-button.collected {
-    background-color: gray; /* Серый цвет для завершенных задач */
+    background-color: #edb87f; /* Серый цвет для завершенных задач */
     color: white;
     cursor: not-allowed;
   }
