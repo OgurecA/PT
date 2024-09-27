@@ -3,7 +3,6 @@
     position: fixed; /* Фиксируем блок, чтобы он не двигался при прокрутке */
     top: 0;
     left: 0;
-    background-color: aquamarine;
     width: 100vw; /* Занимает всю ширину экрана */
     height: 100vh;
     background-size: cover; /* Опция для растягивания изображения по всему экрану */
