@@ -4,8 +4,7 @@
     top: 0;
     left: 0;
     width: 100vw; /* Занимает всю ширину экрана */
-    height: 100vh; /* Занимает всю высоту экрана */
-    background-image: url('../Photo/Background2.png');
+    height: 100vh;
     background-size: cover; /* Опция для растягивания изображения по всему экрану */
     background-repeat: no-repeat; /* Запрещает повторение изображения */
     background-position: center; /* Центрирует изображение */
