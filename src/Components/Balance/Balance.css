@@ -55,19 +55,19 @@
     padding: 10px 20px;
     font-size: 1rem;
     color: #fff;
-    background-color: #adbcbe;
+    background-color: #ff9f38;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   .balance-button.mining {
-    background-color: #737a81; /* Цвет кнопки, когда майнинг активен */
+    background-color: #c67723; /* Цвет кнопки, когда майнинг активен */
     pointer-events: none;
   }
   
   .balance-button.collect {
-    background-color: #cacaca; /* Красный цвет для кнопки Collect */
+    background-color: #ff890b; /* Красный цвет для кнопки Collect */
   }
   .balance-button:disabled {
     cursor: initial;
