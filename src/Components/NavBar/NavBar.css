@@ -45,7 +45,7 @@
     transform-origin: center left;
     transition: width 0.2s ease-in;
     color: inherit;
-    background-color: aqua;
+    background-color: rgb(225, 192, 102);
     margin: 5px;
     cursor: pointer;
     outline: none; /* Убираем обводку по умолчанию */
@@ -59,7 +59,7 @@
   .navbutton.active {
     display: flex;
     width: 120px;
-    background-color: #f0f0f0;
+    background-color: #fdff86;
     border-radius: 25px;
     outline: none;
     justify-content: space-evenly;
