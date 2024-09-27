@@ -1,0 +1,14 @@
+/* Контейнер для фона */
+.background-container {
+    position: fixed; /* Фиксируем блок, чтобы он не двигался при прокрутке */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Занимает всю ширину экрана */
+    height: 100vh; /* Занимает всю высоту экрана */
+    background-image: url('../Photo/Background2.png');
+    background-size: cover; /* Опция для растягивания изображения по всему экрану */
+    background-repeat: no-repeat; /* Запрещает повторение изображения */
+    background-position: center; /* Центрирует изображение */
+    z-index: -1; /* Чтобы фон находился под основным контентом */
+  }
+  
