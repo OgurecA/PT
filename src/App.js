@@ -39,7 +39,7 @@ function App() {
     // Проверяем, что WebApp доступен и инициализирован
     if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
       const user = WebApp.initDataUnsafe.user;
-      WebApp.setHeaderColor('#0C0C0C'); // Устанавливаем цвет заголовка
+      WebApp.setHeaderColor('#ffae00'); // Устанавливаем цвет заголовка
       WebApp.expand(); // Расширяем WebApp
 
       setUserData(user);

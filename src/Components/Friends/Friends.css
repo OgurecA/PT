@@ -30,7 +30,7 @@
     margin-bottom: 8px; /* Отступ между элементами */
     border: 1px solid #ccc; /* Рамка для каждого элемента списка */
     border-radius: 5px; /* Скругленные углы для каждого элемента списка */
-    background-color: rgba(255, 240, 210, 0.7); /* Цвет фона каждого элемента списка */
+    background-color: rgba(207, 170, 97, 0.8); /* Цвет фона каждого элемента списка */
     transition: opacity 0.5s ease, background-color 0.3s ease;
     opacity: 1;
   }
@@ -44,12 +44,12 @@
   }
 
   .friend-item:hover {
-    background-color: #f1f1f1; /* Цвет фона при наведении */
+    background-color: rgba(255, 240, 210, 0.7); /* Цвет фона при наведении */
   }
   
   .friend-name {
     font-weight: bold; /* Жирный шрифт для имени друга */
-    color: #333; /* Цвет текста для имени */
+    color: #ffffff; /* Цвет текста для имени */
   }
   .collect-button {
     padding: 10px 20px;
