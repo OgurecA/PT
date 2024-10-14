@@ -56,7 +56,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Настройка CORS
 const corsOptions = {
-    origin: 'https://dragonlair.website',
+    origin: 'https://web3-poker.online',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     optionsSuccessStatus: 200
@@ -68,7 +68,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 
 
-const db = new sqlite3.Database('./dragonlair.db', (err) => {
+const db = new sqlite3.Database('./pokertap.db', (err) => {
     if (err) {
       console.error('Ошибка при открытии базы данных', err.message);
     } else {
