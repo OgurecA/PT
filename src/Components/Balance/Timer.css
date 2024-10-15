@@ -11,7 +11,7 @@
     padding: 10px 15px;
     border-radius: 15px;
     z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
-    height: 100%;
+    height: 70%;
   }
 
   .timer p {
