@@ -1,6 +1,5 @@
 .timer {
     background-color: white;
-    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -11,7 +10,7 @@
     padding: 10px 15px;
     border-radius: 15px;
     z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
-    height: 60%;
+    height: 100%;
   }
 
   .timer p {
