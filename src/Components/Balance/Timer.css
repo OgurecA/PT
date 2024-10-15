@@ -11,7 +11,7 @@
     border-radius: 15px;
     text-align: left; /* Центрируем текст */
     z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
-    height: 30px;
+    height: 100%;
   }
   .timer.visible {
     opacity: 1;

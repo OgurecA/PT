@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Personal.css'; // Импортируем CSS для стилизации
-import Timer from '../Balance/Timer';
+import DragonCoin from '../Photo/DragonCoin2.png'; 
 
 const Personal = ({ userId }) => {
   const [user, setUser] = useState({
@@ -40,14 +40,13 @@ const Personal = ({ userId }) => {
   }, [userId]);
 
   return (
-    
     <div className="personal">
       {loading || !user ? (
         // Отображаем spinner, пока данные загружаются или если данные пользователя отсутствуют
         <div className="spinner"></div>
       ) : (
         <>
-          <Timer isVisible={activeIndex === 0} cardsVisible={cardsVisible} setCardsVisible={setCardsVisible} />
+          <Timer />
           {user.profileImage && (
             <img src={user.profileImage} alt="User Profile" className="personal-image" />
           )}

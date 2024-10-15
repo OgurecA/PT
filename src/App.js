@@ -57,7 +57,6 @@ function App() {
 
       <Personal userId={userId} />
 
-      <Timer isVisible={activeIndex === 0} cardsVisible={cardsVisible} setCardsVisible={setCardsVisible} />
       {(activeIndex === 0 && cardsVisible === true) && <Coin/>}
 
       {activeIndex === 1 && <Tasks/>}
