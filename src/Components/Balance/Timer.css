@@ -10,54 +10,14 @@
     width: 70px;
     padding: 10px 15px;
     border-radius: 15px;
-    text-align: left; /* Центрируем текст */
     z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
-    height: 100%;
+    height: 60%;
   }
-  .timer.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
-  .timer.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  .timer-header {
-    display: flex;
-    align-items: end;
-    justify-content: space-between; /* Располагаем текст слева и справа */
-    width: 100%;
-    margin-bottom: 10px; /* Отступ между текстом и кнопкой */
-  }
-  
+
   .timer p {
     font-size: 1rem;
     color: black;
     font-weight: bold; /* Обычный шрифт для текста */
-  }
-  
-  .timer-amount {
-    font-size: 2rem;
-    color: #ffffff;
-    font-weight: bold; /* Жирный шрифт для числа */
-  }
-  @media (min-width: 440px) {
-    .timer {
-        bottom: 500px;
-    }
-  }
-
-  .timer-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #ff9f38;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
   }
 
   
