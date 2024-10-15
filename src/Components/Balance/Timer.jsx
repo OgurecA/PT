@@ -10,7 +10,7 @@ const Timer = ({ isVisible, cardsVisible, setCardsVisible }) => {
 
   return (
     <div className={`timer ${isVisible ? 'visible' : 'hidden'}`}>
-      
+      <p>12.00.00</p>
     </div>
   );
 };
