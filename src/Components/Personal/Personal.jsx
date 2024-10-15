@@ -45,14 +45,15 @@ const Personal = ({ userId }) => {
     <div className="personal">
       {loading || !user ? (
         // Отображаем spinner, пока данные загружаются или если данные пользователя отсутствуют
-        <div className="spinner"></div>
-      ) : (
         <>
-          
+          <div className="spinner"></div>
+          <Timer />
+        </>
+      ) : (
+        <>  
           {user.profileImage && (
             <img src={user.profileImage} alt="User Profile" className="personal-image" />
           )}
-          <Timer />
           <div className="personal-info">
             <span className="personal-name">{user.firstName} {user.lastName}</span>
             <span className="personal-username">@{user.username}</span>
