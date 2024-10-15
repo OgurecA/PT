@@ -27,6 +27,8 @@ function App() {
 
   const [balanceLoading, setBalanceLoading] = useState(true);
 
+  const [cardsVisible, setCardsVisible] = useState(false)
+
   const [clicks, setClicks] = useState([]);
   const [balanceAmount, setBalanceAmount] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -61,10 +63,9 @@ function App() {
 
       <Personal userId={userId} />
 
-      <Balance
-        isVisible={activeIndex === 0}
-      />
-      {activeIndex === 0 && <Coin/>}
+      <Balance isVisible={activeIndex === 0} cardsVisible={cardsVisible} setCardsVisible={setCardsVisible} />
+
+      {(activeIndex === 0 || cardsVisible === true) && <Coin/>}
 
       {activeIndex === 1 && <Tasks/>}
 

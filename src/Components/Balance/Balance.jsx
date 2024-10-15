@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Balance.css'; // Импортируем CSS для стилизации
 
-const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading, invitedBonus }) => {
+const Balance = ({ isVisible, cardsVisible, setCardsVisible }) => {
   // Состояние для отслеживания таймера и видимости кнопки
   const [timer, setTimer] = useState('06:00:00'); // Инициализируем таймер на 6 часов
   const [isMining, setIsMining] = useState(false); // Состояние для отслеживания, идет ли майнинг
@@ -21,7 +21,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading, i
   const handleButtonClick = () => {
     if (isCollected) {
       // Если можно нажать Collect, возвращаем кнопку к состоянию "Start mining"
-      setBalanceAmount(balanceAmount + 100);
+      setCardsVisible(true);
       setIsCollected(false);
       localStorage.setItem('isCollected', 'false');
       setTimer('06:00:00'); // Сбрасываем таймер до начального значения
@@ -30,6 +30,7 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading, i
       const countdownTime = 10 * 1000; // 6 часов в миллисекундах
       const newEndTime = Date.now() + countdownTime; // Устанавливаем конечное время
       setEndTime(newEndTime);
+      setCardsVisible(false);
       setIsMining(true); // Устанавливаем состояние майнинга в true
       localStorage.setItem('endTime', newEndTime.toString()); // Сохраняем конечное время в localStorage
     }
@@ -85,11 +86,6 @@ const Balance = ({ isVisible, balanceAmount, setBalanceAmount, balanceLoading, i
     <div className={`balance ${isVisible ? 'visible' : 'hidden'}`}>
       <div className="balance-header">
         <span className="balance-text">Your Balance</span>
-        {balanceLoading ? (
-          <div className="spinner"></div>
-        ) : (
-          <span className="balance-amount">{balanceAmount + invitedBonus}</span>
-        )}
       </div>
       <button
         className={`balance-button ${isMining ? 'mining' : isCollected ? 'collect' : ''}`} // Добавляем класс в зависимости от состояния
