@@ -1,5 +1,5 @@
 .timer {
-    background-color: transparent;
+    background-color: white;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -8,6 +8,7 @@
     right: 20px;
     width: 50px;
     padding: 10px 15px;
+    border-radius: 15px;
     text-align: left; /* Центрируем текст */
     z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
     height: 30px;
@@ -30,10 +31,10 @@
     margin-bottom: 10px; /* Отступ между текстом и кнопкой */
   }
   
-  .timer-text {
+  .timer p {
     font-size: 1.5rem;
-    color: #ffffff96;
-    font-weight: normal; /* Обычный шрифт для текста */
+    color: black;
+    font-weight: bold; /* Обычный шрифт для текста */
   }
   
   .timer-amount {
