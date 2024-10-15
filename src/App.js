@@ -59,8 +59,6 @@ function App() {
     <>
       <BackgroundContainer />
 
-      <Personal userId={userId} />
-
       <Balance
         isVisible={activeIndex === 0}
         balanceAmount={balanceAmount}
