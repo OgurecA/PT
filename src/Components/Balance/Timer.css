@@ -6,7 +6,7 @@
     justify-content: space-around;
     top: 20px;
     right: 20px;
-    width: 50px;
+    width: 70px;
     padding: 10px 15px;
     border-radius: 15px;
     text-align: left; /* Центрируем текст */
@@ -32,7 +32,7 @@
   }
   
   .timer p {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: black;
     font-weight: bold; /* Обычный шрифт для текста */
   }
