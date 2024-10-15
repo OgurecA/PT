@@ -41,7 +41,7 @@ function App() {
     // Проверяем, что WebApp доступен и инициализирован
     if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
       const user = WebApp.initDataUnsafe.user;
-      WebApp.setHeaderColor('#ffae00'); // Устанавливаем цвет заголовка
+      WebApp.setHeaderColor('#0C0C0C'); // Устанавливаем цвет заголовка
       WebApp.expand(); // Расширяем WebApp
 
       setUserData(user);
@@ -57,7 +57,23 @@ function App() {
   
   return (
     <>
-      
+      <BackgroundContainer />
+
+      <Personal userId={userId} />
+
+      <Balance
+        isVisible={activeIndex === 0}
+      />
+      {activeIndex === 0 && <Coin/>}
+
+      {activeIndex === 1 && <Tasks/>}
+
+      {activeIndex === 2 && <Invite userId={userId}/>}
+      {activeIndex === 2 && <Friends userId={userId}/>}
+
+      {activeIndex === 3 && <Wallet />}
+
+      <NavBar onNavClick={handleNavBarClick} activeIndex={activeIndex} />
     </>
   );
 }
