@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Personal.css'; // Импортируем CSS для стилизации
 import DragonCoin from '../Photo/DragonCoin2.png'; 
+import Timer from './Components/Balance/Timer';
+
 
 const Personal = ({ userId }) => {
   const [user, setUser] = useState({

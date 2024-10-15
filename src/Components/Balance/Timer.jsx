@@ -9,7 +9,7 @@ const Timer = ({  }) => {
 
 
   return (
-    <div className={`timer ${isVisible ? 'visible' : 'hidden'}`}>
+    <div className={`timer`}>
       <p>12.00.00</p>
     </div>
   );
