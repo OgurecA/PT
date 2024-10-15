@@ -5,13 +5,14 @@
     flex-direction: column;
     justify-content: space-around;
     align-self: center;
-    top: 0px;
-    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
     width: 70px;
     padding: 10px 15px;
-    border-radius: 15px;
+    border-radius: 10px;
     z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
-    height: 70%;
+    height: 65%;
   }
 
   .timer p {
