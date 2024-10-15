@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import Coin from './Components/Coin/Coin';
-import Balance from './Components/Balance/Timer';
+import Timer from './Components/Balance/Timer';
 import Personal from './Components/Personal/Personal';
 import Invite from './Components/Invite/Invite';
 import Friends from './Components/Friends/Friends';
