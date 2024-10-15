@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const app = express();
 app.set('trust proxy', 1);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3100;
 
 // Логирование запросов
 app.use(morgan('combined'));
