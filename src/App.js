@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import Coin from './Components/Coin/Coin';
-import Balance from './Components/Balance/Balance';
+import Balance from './Components/Balance/Timer';
 import Personal from './Components/Personal/Personal';
 import Invite from './Components/Invite/Invite';
 import Friends from './Components/Friends/Friends';
@@ -11,8 +11,6 @@ import Tasks from './Components/Tasks/Tasks';
 import BackgroundContainer from './Components/Background/Background';
 
 import WebApp from '@twa-dev/sdk';
-
-import DragonCoin from './Components/Photo/DragonCoin2.png';
 
 function App() {
 
@@ -25,15 +23,11 @@ function App() {
   const [userName, setUserName] = useState(null);
   const [isPremium, setPremium] = useState(false);
 
-  const [balanceLoading, setBalanceLoading] = useState(true);
 
   const [cardsVisible, setCardsVisible] = useState(false)
 
-  const [clicks, setClicks] = useState([]);
-  const [balanceAmount, setBalanceAmount] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const [invitedBonus, setInvitedBonus] = useState(0);
 
   const handleNavBarClick = (index) => {
     setActiveIndex(index);
@@ -64,7 +58,6 @@ function App() {
       <Personal userId={userId} />
 
       <Balance isVisible={activeIndex === 0} cardsVisible={cardsVisible} setCardsVisible={setCardsVisible} />
-
       {(activeIndex === 0 && cardsVisible === true) && <Coin/>}
 
       {activeIndex === 1 && <Tasks/>}

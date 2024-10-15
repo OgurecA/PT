@@ -1,32 +1,28 @@
-.balance {
-    background-color: #0C0C0C;
+.timer {
+    background-color: transparent;
     position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    bottom: 450px;
-    left: 50%; /* Центрируем элемент по горизонтали */
-    transform: translateX(-50%); /* Смещаем элемент на половину его ширины для точного центрирования */
-    max-width: 80vw; /* Задаем ширину, чтобы почти вся ширина экрана была занята */
-    width: 500px; /* Максимальная ширина для больших экранов */
+    top: 20px;
+    right: 20px;
+    width: 50px;
     padding: 10px 15px;
-    border-radius: 10px; /* Скругление углов */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень */
     text-align: left; /* Центрируем текст */
     z-index: 1; /* Устанавливаем z-index выше, чтобы элемент был видимым поверх других */
-    height: 100px;
+    height: 30px;
   }
-  .balance.visible {
+  .timer.visible {
     opacity: 1;
     pointer-events: auto;
   }
   
-  .balance.hidden {
+  .timer.hidden {
     opacity: 0;
     pointer-events: none;
   }
   
-  .balance-header {
+  .timer-header {
     display: flex;
     align-items: end;
     justify-content: space-between; /* Располагаем текст слева и справа */
@@ -34,24 +30,24 @@
     margin-bottom: 10px; /* Отступ между текстом и кнопкой */
   }
   
-  .balance-text {
+  .timer-text {
     font-size: 1.5rem;
     color: #ffffff96;
     font-weight: normal; /* Обычный шрифт для текста */
   }
   
-  .balance-amount {
+  .timer-amount {
     font-size: 2rem;
     color: #ffffff;
     font-weight: bold; /* Жирный шрифт для числа */
   }
   @media (min-width: 440px) {
-    .balance {
+    .timer {
         bottom: 500px;
     }
   }
 
-  .balance-button {
+  .timer-button {
     padding: 10px 20px;
     font-size: 1rem;
     color: #fff;
@@ -61,20 +57,9 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  .balance-button.mining {
-    background-color: #c67723; /* Цвет кнопки, когда майнинг активен */
-    pointer-events: none;
-  }
+
   
-  .balance-button.collect {
-    background-color: #ff890b; /* Красный цвет для кнопки Collect */
-  }
-  .balance-button:disabled {
-    cursor: initial;
-    opacity: 0.7;
-  }
-  
-  .balance .spinner {
+  .timer .spinner {
     border: 4px solid #898989; /* Light grey */
     border-top: 4px solid #989898; /* Blue */
     border-radius: 50%;
