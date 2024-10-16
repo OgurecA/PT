@@ -47,21 +47,21 @@
 }
 
 .card1 {
-  top: 130px;
+  top: 140px;
   left: 70px;
-  transform: rotate(-20deg); /* Вращаем первую карту */
+  transform: rotate(-15deg); /* Вращаем первую карту */
 }
 
 .card2 {
-  top: 220px;
-  left: 130px;
+  top: 240px;
+  left: 140px;
   transform: rotate(25deg); /* Вращаем вторую карту */
 }
 
 .card3 {
-  top: 310px;
+  top: 340px;
   left: 80px;
-  transform: rotate(-30deg); /* Вращаем третью карту */
+  transform: rotate(-35deg); /* Вращаем третью карту */
 }
 
 .card-image {
