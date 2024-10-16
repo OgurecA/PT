@@ -35,8 +35,8 @@
 
 .card-container {
   position: relative; /* Контейнер должен быть относительным для позиционирования карт */
-  width: 100%; /* Устанавливаем ширину контейнера */
-  height: 100%;
+  width: 100vw; /* Устанавливаем ширину контейнера */
+  height: 100vh;
 }
 
 .card {
@@ -57,7 +57,7 @@
 .card.notchosen {
   position: absolute;
   transition: transform 0.3s ease;
-  transform: translateX(-200%) rotate(-30deg); /* Карты улетают за пределы экрана влево */
+  transform: translateX(-300%) rotate(-30deg); /* Карты улетают за пределы экрана влево */
 }
 
 .card1 {
