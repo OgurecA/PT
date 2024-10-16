@@ -35,9 +35,8 @@
 
 .card-container {
   position: relative; /* Контейнер должен быть относительным для позиционирования карт */
-  width: 300px; /* Устанавливаем ширину контейнера */
-  height: 400px; /* Устанавливаем высоту контейнера */
-  margin: 0 auto;
+  width: 100%; /* Устанавливаем ширину контейнера */
+  height: 100%;
 }
 
 .card {
@@ -48,19 +47,19 @@
 }
 
 .card1 {
-  top: 300px;
+  top: 70px;
   left: 20px;
   transform: rotate(-15deg); /* Вращаем первую карту */
 }
 
 .card2 {
-  top: 700px;
+  top: 100px;
   left: 50px;
   transform: rotate(5deg); /* Вращаем вторую карту */
 }
 
 .card3 {
-  top: 1100px;
+  top: 150px;
   left: 80px;
   transform: rotate(25deg); /* Вращаем третью карту */
 }
