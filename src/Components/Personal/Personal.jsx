@@ -46,7 +46,10 @@ const Personal = ({ userId }) => {
       {loading || !user ? (
         // Отображаем spinner, пока данные загружаются или если данные пользователя отсутствуют
         <>
-          <div className="spinner"></div>
+          <div className="personal-info">
+            <span className="personal-name">John Smith</span>
+            <span className="personal-username">@JSmith</span>
+          </div>
           <Timer />
         </>
       ) : (
