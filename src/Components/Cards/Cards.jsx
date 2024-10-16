@@ -12,19 +12,19 @@ const Card = () => {
   return (
     <div className="card-container">
       <div
-        className={`card card1 ${selectedCard === 1 ? 'chosen' : 'notchosen'}`}
+        className={`card card1 ${selectedCard === null ? '' : selectedCard === 1 ? 'chosen' : 'notchosen'}`}
         onClick={() => handleCardClick(1)}
       >
         <img src={Rubashka} alt="Card 1" className="card-image" />
       </div>
       <div
-        className={`card card2 ${selectedCard === 2 ? 'chosen' : 'notchosen'}`}
+        className={`card card2 ${selectedCard === null ? '' : selectedCard === 2 ? 'chosen' : 'notchosen'}`}
         onClick={() => handleCardClick(2)}
       >
         <img src={Rubashka} alt="Card 2" className="card-image" />
       </div>
       <div
-        className={`card card3 ${selectedCard === 3 ? 'chosen' : 'notchosen'}`}
+        className={`card card3 ${selectedCard === null ? '' : selectedCard === 3 ? 'chosen' : 'notchosen'}`}
         onClick={() => handleCardClick(3)}
       >
         <img src={Rubashka} alt="Card 3" className="card-image" />
