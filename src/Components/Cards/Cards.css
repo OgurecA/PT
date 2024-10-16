@@ -46,6 +46,19 @@
   transition: transform 0.3s ease; /* Плавная анимация при наведении (можно убрать, если не нужно) */
 }
 
+.chosen {
+  transform: scale(1.1) rotate(0deg);
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.notchosen {
+  transform: rotate(-30deg);
+  transform: translateX(-80%);
+}
+
 .card1 {
   top: 150px;
   left: 70px;
