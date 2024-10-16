@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Timer.css'; // Импортируем CSS для стилизации
 
 const Timer = () => {
-  const initialTime = 1 * 1 * 30 * 1000; // 8 часов в миллисекундах
+  const initialTime = 1 * 1 * 20 * 1000; // 8 часов в миллисекундах
   const [timeLeft, setTimeLeft] = useState(initialTime); // Состояние для отслеживания оставшегося времени
   const [isFinished, setIsFinished] = useState(false); // Состояние для отслеживания завершения таймера
 
@@ -17,18 +17,22 @@ const Timer = () => {
   };
 
   useEffect(() => {
-    // Попытка загрузить конечное время из localStorage
     const savedEndTime = localStorage.getItem('endTime');
+    
+    // Попытка загрузить конечное время из localStorage
     if (savedEndTime) {
       const timeRemaining = parseInt(savedEndTime, 10) - Date.now();
+      
       if (timeRemaining > 0) {
         setTimeLeft(timeRemaining);
+        setIsFinished(false);
       } else {
-        setTimeLeft(initialTime);
+        setTimeLeft(0);
         setIsFinished(true);
       }
     }
 
+    // Устанавливаем интервал обновления каждую секунду
     const interval = setInterval(() => {
       setTimeLeft((prevTimeLeft) => {
         if (prevTimeLeft <= 1000) {
@@ -44,10 +48,11 @@ const Timer = () => {
   }, []);
 
   useEffect(() => {
-    // Сохранение конечного времени в localStorage
-    const endTime = Date.now() + timeLeft;
-    localStorage.setItem('endTime', endTime);
-  }, [timeLeft]);
+    if (!isFinished) {
+      const endTime = Date.now() + timeLeft;
+      localStorage.setItem('endTime', endTime);
+    }
+  }, [timeLeft, isFinished]);
 
   return (
     <div className={`timer`}>
