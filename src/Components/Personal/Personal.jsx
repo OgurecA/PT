@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './Personal.css'; // Импортируем CSS для стилизации
-import DragonCoin from '../Photo/DragonCoin2.png'; 
 import Timer from '../Balance/Timer';
 
 
@@ -46,10 +45,7 @@ const Personal = ({ userId }) => {
       {loading || !user ? (
         // Отображаем spinner, пока данные загружаются или если данные пользователя отсутствуют
         <>
-          <div className="personal-info">
-            <span className="personal-name">John Smith</span>
-            <span className="personal-username">@JSmith</span>
-          </div>
+          <div className="spinner"></div>
           <Timer />
         </>
       ) : (

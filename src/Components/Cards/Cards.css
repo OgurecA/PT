@@ -1,0 +1,74 @@
+.flip-scale-up-diag-1 {
+	-webkit-animation: flip-scale-up-diag-1 0.5s linear both;
+	        animation: flip-scale-up-diag-1 0.5s linear both;
+}
+
+@-webkit-keyframes flip-scale-up-diag-1 {
+  0% {
+    -webkit-transform: scale(1) rotate3d(1, 1, 0, 0deg);
+            transform: scale(1) rotate3d(1, 1, 0, 0deg);
+  }
+  50% {
+    -webkit-transform: scale(2.5) rotate3d(1, 1, 0, 90deg);
+            transform: scale(2.5) rotate3d(1, 1, 0, 90deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotate3d(1, 1, 0, 180deg);
+            transform: scale(1) rotate3d(1, 1, 0, 180deg);
+  }
+}
+
+@keyframes flip-scale-up-diag-1 {
+  0% {
+    -webkit-transform: scale(1) rotate3d(1, 1, 0, 0deg);
+            transform: scale(1) rotate3d(1, 1, 0, 0deg);
+  }
+  50% {
+    -webkit-transform: scale(2.5) rotate3d(1, 1, 0, 90deg);
+            transform: scale(2.5) rotate3d(1, 1, 0, 90deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotate3d(1, 1, 0, 180deg);
+            transform: scale(1) rotate3d(1, 1, 0, 180deg);
+  }
+}
+
+.card-container {
+  position: relative; /* Контейнер должен быть относительным для позиционирования карт */
+  width: 300px; /* Устанавливаем ширину контейнера */
+  height: 400px; /* Устанавливаем высоту контейнера */
+  margin: 0 auto;
+}
+
+.card {
+  position: absolute; /* Позволяет свободно размещать карты внутри контейнера */
+  width: 150px;
+  height: 220px;
+  transition: transform 0.3s ease; /* Плавная анимация при наведении (можно убрать, если не нужно) */
+}
+
+.card1 {
+  top: 30px;
+  left: 20px;
+  transform: rotate(-15deg); /* Вращаем первую карту */
+}
+
+.card2 {
+  top: 70px;
+  left: 50px;
+  transform: rotate(5deg); /* Вращаем вторую карту */
+}
+
+.card3 {
+  top: 110px;
+  left: 80px;
+  transform: rotate(25deg); /* Вращаем третью карту */
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Устанавливаем масштабирование изображения по размеру карты */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для придания объёма */
+}

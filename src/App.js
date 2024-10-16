@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
-import Coin from './Components/Coin/Coin';
-import Timer from './Components/Balance/Timer';
+import Card from './Components/Cards/Cards';
 import Personal from './Components/Personal/Personal';
 import Invite from './Components/Invite/Invite';
 import Friends from './Components/Friends/Friends';
@@ -54,6 +53,8 @@ function App() {
   return (
     <>
       <BackgroundContainer />
+
+      <Card />
 
       <Personal userId={userId} />
 

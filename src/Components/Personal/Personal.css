@@ -8,15 +8,11 @@
     max-width: 80vw;
     width: 500px;
     position: fixed; /* Закрепляем элемент */
-    bottom: 580px;
+    top: 30px;
     left: 50%;
     transform: translateX(-50%);
   }
-  @media (min-width: 440px) {
-    .personal {
-        bottom: 630px;
-    }
-  }
+
   
   .personal-image {
     width: 50px; /* Размер изображения */
