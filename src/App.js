@@ -58,7 +58,6 @@ function App() {
 
       <Personal userId={userId} />
 
-      {(activeIndex === 0 && cardsVisible === true) && <Coin/>}
 
       {activeIndex === 1 && <Tasks/>}
 
