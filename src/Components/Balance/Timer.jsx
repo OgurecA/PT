@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Timer.css'; // Импортируем CSS для стилизации
 
 const Timer = () => {
-  const initialTime = 1 * 1 * 30 * 1000; // 8 часов в миллисекундах
+  const initialTime = 1 * 1 * 30 * 1000; // Установите 30 секунд для тестирования (можно вернуть на 8 часов)
   const [timeLeft, setTimeLeft] = useState(initialTime); // Состояние для отслеживания оставшегося времени
   const [isFinished, setIsFinished] = useState(false); // Состояние для отслеживания завершения таймера
 
@@ -37,10 +37,9 @@ const Timer = () => {
     const interval = setInterval(() => {
       setTimeLeft((prevTimeLeft) => {
         if (prevTimeLeft <= 1000) {
-          clearInterval(interval);
           setTimeLeft(initialTime); // Сброс таймера на начальное время
           localStorage.setItem('endTime', Date.now() + initialTime); // Обновляем конечное время
-          return initialTime; // Перезапускаем таймер с 8 часов
+          return initialTime; // Перезапускаем таймер с начального времени
         }
         return prevTimeLeft - 1000;
       });
