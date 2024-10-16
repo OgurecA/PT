@@ -24,7 +24,7 @@ const Timer = () => {
       if (timeRemaining > 0) {
         setTimeLeft(timeRemaining);
       } else {
-        setTimeLeft(0);
+        setTimeLeft(initialTime);
         setIsFinished(true);
       }
     }
