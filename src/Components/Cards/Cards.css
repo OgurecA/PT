@@ -47,18 +47,17 @@
 }
 
 .card.chosen {
-  transition: transform 0.3s ease;
-  transform: scale(1.1) rotate(0deg);
-  left: 50%;
-  transform: translateX(-50%);
+  position: absolute; /* Обязательно нужно задать абсолютное позиционирование */
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.1) rotate(0deg); /* Центрируем карту и масштабируем */
+  transition: transform 0.3s ease;
 }
 
 .card.notchosen {
+  position: absolute;
   transition: transform 0.3s ease;
-  transform: rotate(-30deg);
-  transform: translateX(-80%);
+  transform: translateX(-200%) rotate(-30deg); /* Карты улетают за пределы экрана влево */
 }
 
 .card1 {
