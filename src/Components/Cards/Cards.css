@@ -34,28 +34,29 @@
 }
 
 .card-container {
-  position: absolute; /* Позволяет свободно размещать карты внутри контейнера */
   position: relative; /* Контейнер должен быть относительным для позиционирования карт */
   width: 100vw; /* Устанавливаем ширину контейнера */
-  height: 60vh;
-  bottom: 20vh;
+  height: 100vh;
 }
 
 .card {
   position: absolute; /* Позволяет свободно размещать карты внутри контейнера */
   width: 150px;
   height: 220px;
-  transition: transform 1s ease, top 1s ease, left 1s ease; /* Плавная анимация перемещения */
+  transition: transform 1s ease; /* Плавная анимация при наведении (можно убрать, если не нужно) */
 }
 
 .card.chosen {
-  transform: translate(0px, 0px) scale(1.2) rotate(0deg);
+  position: absolute; /* Обязательно нужно задать абсолютное позиционирование */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.2) rotate(0deg); /* Центрируем карту и масштабируем */
   transition: transform 1s ease;
 }
 
 .card.notchosen {
   position: absolute;
-  transition: transform 2s ease;
+  transition: transform 1s ease;
   transform: translateX(-300%) rotate(-60deg); /* Карты улетают за пределы экрана влево */
 }
 
