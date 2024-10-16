@@ -48,15 +48,14 @@
 
 .card.chosen {
   position: absolute; /* Обязательно нужно задать абсолютное позиционирование */
-  top: 50%;
-  left: 50%;
+
   transform: translate(-50%, -50%) scale(1.1) rotate(0deg); /* Центрируем карту и масштабируем */
   transition: transform 1s ease;
 }
 
 .card.notchosen {
   position: absolute;
-  transition: transform 1s ease;
+  transition: transform 2s ease;
   transform: translateX(-300%) rotate(-60deg); /* Карты улетают за пределы экрана влево */
 }
 
