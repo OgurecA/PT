@@ -64,22 +64,19 @@
 .card1 {
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  transform: rotate(-15deg); /* Вращаем первую карту */
+  transform: translate(-50%, -50%) rotate(-15deg);
 }
 
 .card2 {
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  transform: rotate(25deg); /* Вращаем вторую карту */
+  transform: translate(-50%, -50%) rotate(25deg);
 }
 
 .card3 {
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  transform: rotate(-35deg); /* Вращаем третью карту */
+  transform: translate(-50%, -50%) rotate(-35deg);
 }
 
 .card-image {
