@@ -5,30 +5,30 @@
 
 @-webkit-keyframes flip-scale-up-ver {
   0% {
-    -webkit-transform: scale(1.2) rotateY(0);
-            transform: scale(1.2) rotateY(0);
+    -webkit-transform: scale(1) rotateY(0);
+            transform: scale(1) rotateY(0);
   }
   50% {
     -webkit-transform: scale(2.5) rotateY(90deg);
             transform: scale(2.5) rotateY(90deg);
   }
   100% {
-    -webkit-transform: scale(1.2) rotateY(180deg);
-            transform: scale(1.2) rotateY(180deg);
+    -webkit-transform: scale(1) rotateY(180deg);
+            transform: scale(1) rotateY(180deg);
   }
 }
 @keyframes flip-scale-up-ver {
   0% {
-    -webkit-transform: scale(1.2) rotateY(0);
-            transform: scale(1.2) rotateY(0);
+    -webkit-transform: scale(1) rotateY(0);
+            transform: scale(1) rotateY(0);
   }
   50% {
     -webkit-transform: scale(2.5) rotateY(90deg);
             transform: scale(2.5) rotateY(90deg);
   }
   100% {
-    -webkit-transform: scale(1.2) rotateY(180deg);
-            transform: scale(1.2) rotateY(180deg);
+    -webkit-transform: scale(1) rotateY(180deg);
+            transform: scale(1) rotateY(180deg);
   }
 }
 
@@ -44,12 +44,15 @@
   position: absolute; /* Позволяет свободно размещать карты внутри контейнера */
   width: 150px;
   height: 220px;
-  transition: transform 1s ease; /* Плавный переход только через transform */
-  will-change: transform;
+  transition: transform 1s ease, top 1s ease, left 1s ease;
 }
 
 .card.chosen {
-  transform: translate(0vw, 0vh) scale(1.2) rotate(0deg);
+  position: absolute;
+  inset: 0; /* Устанавливаем равные отступы со всех сторон */
+  margin: auto;
+  transform: scale(1.2) rotate(0deg); /* Масштабирование и вращение */
+  transition: transform 1s ease;
 }
 
 .card.notchosen {
