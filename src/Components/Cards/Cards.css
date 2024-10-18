@@ -62,20 +62,23 @@
 }
 
 .card1 {
-  top: 150px;
-  left: 70px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   transform: rotate(-15deg); /* Вращаем первую карту */
 }
 
 .card2 {
-  top: 260px;
-  left: 140px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   transform: rotate(25deg); /* Вращаем вторую карту */
 }
 
 .card3 {
-  top: 350px;
-  left: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   transform: rotate(-35deg); /* Вращаем третью карту */
 }
 
