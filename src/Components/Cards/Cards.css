@@ -1,7 +1,6 @@
 .flip-scale-up-ver {
 	-webkit-animation: flip-scale-up-ver 0.5s linear both;
 	        animation: flip-scale-up-ver 0.5s linear both;
-          transform: translate(-50%, -50%);
 }
 
 @-webkit-keyframes flip-scale-up-ver {
@@ -49,10 +48,10 @@
 }
 
 .card.chosen {
-  position: absolute; /* Обязательно нужно задать абсолютное позиционирование */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.2) rotate(0deg); /* Центрируем карту и масштабируем */
+  position: absolute;
+  inset: 0; /* Устанавливаем равные отступы со всех сторон */
+  margin: auto;
+  transform: scale(1.2) rotate(0deg); /* Масштабирование и вращение */
   transition: transform 1s ease;
 }
 
